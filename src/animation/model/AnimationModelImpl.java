@@ -1,6 +1,15 @@
 package animation.model;
 
+import java.util.List;
+
 public class AnimationModelImpl implements AnimationModel {
+
+  private List<Shape> shapes;
+
+  AnimationModelImpl() {
+
+  }
+
   @Override
   public void addShape(String name, Shape shape) throws IllegalArgumentException {
 

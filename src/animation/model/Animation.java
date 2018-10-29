@@ -16,10 +16,13 @@ public interface Animation {
   int endTick();
 
   /**
-   * Does the end of this Animation align with the start of other? (i.e., does this end at the same
-   * time and with all the same properties as the given animation starts?)
+   * Would the given animation conflict with this animation if they were placed in the same
+   * timeline? Details of what "conflicting" mean dependent on the implementation, but generally
+   * speaking will return false if the animations try to change the same property at the same time,
+   * and false otherwise.
    *
-   * @return whether the Animations align
+   * @param other the other animation to compare to
+   * @return true if the animations conflict, false otherwise
    */
-  boolean alignsWith(Animation other);
+  boolean conflictsWith(Animation other);
 }

@@ -1,15 +1,15 @@
 import org.junit.Test;
 
-import java.awt.*;
-import java.awt.geom.Dimension2D;
-import java.awt.geom.Point2D;
-import java.util.List;
+import java.awt.Point;
+import java.awt.Color;
+import java.awt.Dimension;
 
 import animation.model.Animation;
-import animation.model.AnimationModel;
 import animation.model.BasicAnimation;
-import animation.model.Homework05.AccessibleAnimation;
-import animation.model.Homework05.AnimAccessibleShape;
+import animation.model.Homework05.AccessibleAnimationImpl;
+import animation.model.Homework05.AnimAccessibleShapeImpl;
+import animation.model.Homework05.StringModel;
+import animation.model.Homework05.StringModelImpl;
 import animation.model.Shape;
 import animation.model.ShapeImpl;
 import animation.model.ShapeType;
@@ -36,7 +36,7 @@ public class Hw05Tests {
 
   @Test
   public void testAnimationModel() {
-    AnimationModel model = new StringModelImpl();
+    StringModel model = new StringModelImpl();
     Shape r = new AnimAccessibleShapeImpl(ShapeType.RECTANGLE);
     Shape c = new AnimAccessibleShapeImpl(ShapeType.ELLIPSE);
     model.addShape("R", r);
@@ -74,7 +74,7 @@ public class Hw05Tests {
     Animation a1 = new BasicAnimation(1, new Point(), new Dimension(), Color.black,
             10, new Point(), new Dimension(), Color.black);
     Animation a2 = new BasicAnimation(2, new Point(), new Dimension(), Color.black,
-            15, new Pointe(), new Dimension(), Color.black);
+            15, new Point(), new Dimension(), Color.black);
     shape.addAnimation(a1);
     shape.addAnimation(a2);
   }

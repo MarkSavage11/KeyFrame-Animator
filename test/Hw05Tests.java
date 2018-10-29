@@ -47,7 +47,7 @@ public class Hw05Tests {
     assertEquals(200, anim.getStartPosition().x);
     assertEquals(200, anim.getStartPosition().y);
 
-    Dimension startDimClone = anim.getEndSize();
+    Dimension startDimClone = anim.getStartSize();
     assertEquals(100, startDimClone.height);
     assertEquals(50, startDimClone.width);
 
@@ -120,7 +120,7 @@ public class Hw05Tests {
     shape.addAnimation(null);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testModelAddShapeFail1() {
     boolean alreadyExistsFail = false;
     boolean nullShapeFail = false;
@@ -141,11 +141,11 @@ public class Hw05Tests {
       nullShapeFail = true;
     }
 
-    assertFalse(alreadyExistsFail && nullShapeFail);
+    assertTrue(alreadyExistsFail && nullShapeFail);
   }
 
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test
   public void testModelAddAnimationFail() {
     boolean noMatchFail = false;
     boolean nullNameFail = false;

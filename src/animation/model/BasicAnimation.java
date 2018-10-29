@@ -52,11 +52,11 @@ public class BasicAnimation implements Animation {
   @Override
   public String toString() {
     StringBuilder result = new StringBuilder();
-    result.append("" + startTick() + " " + startPosition.getX() + " " + startPositon.getY() + " "
+    result.append("" + startTick() + " " + startPosition.getX() + " " + startPosition.getY() + " "
             + startSize.getWidth() + " " + startSize.getHeight() + " "
             + startColor.getRed() + " " + startColor.getGreen() + " " + startColor.getBlue());
     result.append("    ");
-    result.append("" + endTick() + " " + endPosition.getX() + " " + endPositon.getY() + " "
+    result.append("" + endTick() + " " + endPosition.getX() + " " + endPosition.getY() + " "
             + endSize.getWidth() + " " + endSize.getHeight() + " "
             + endColor.getRed() + " " + endColor.getGreen() + " " + endColor.getBlue());
 

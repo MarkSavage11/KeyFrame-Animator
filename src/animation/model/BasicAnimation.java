@@ -71,13 +71,25 @@ public class BasicAnimation implements Animation {
   public boolean conflictsWith(Animation other) {
     if (other.endTick() < this.startTick || other.startTick() > this.endTick) {
       return false;
-    } else if (other.startTick() > this.startTick && other.startTick() < this.endTick) {
-
+    } else if ((other.startTick() > this.startTick && other.startTick() < this.endTick) ||
+            (other.endTick() < this.endTick && other.endTick() > this.startTick)) {
+      return doPropertiesOverlap(other);
+    } else {
+      return doPropertiesConflict(other);
     }
   }
 
-  private boolean doPropertiesOverlap(Animation other) {
+  private boolean doPropertiesConflict(Animation other) {
+    return (other.getStartColor() != this.endColor || other.getEndColor() != this.startColor) ||
+            (other.getStartPosition() != this.endPosition || other.getEndPosition() != this.startPosition) ||
+            (other.getStartSize() != this.endSize || other.getEndSize() != this.startSize);
 
+  }
+
+  private boolean doPropertiesOverlap(Animation other) {
+    return other.getStartSize() == null &&
+            other.getStartPosition() == null &&
+            other.getStartColor() == null;
   }
 
 

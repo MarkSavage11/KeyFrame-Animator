@@ -1,6 +1,8 @@
 package animation.model;
 
-import java.awt.*;
+import java.awt.Point;
+import java.awt.Dimension;
+import java.awt.Color;
 
 public class BasicAnimation implements Animation {
 
@@ -35,26 +37,32 @@ public class BasicAnimation implements Animation {
     return endTick;
   }
 
+  @Override
   public Point getStartPosition() {
     return startPosition.getLocation();
   }
 
+  @Override
   public Dimension getStartSize() {
     return startSize.getSize();
   }
 
+  @Override
   public Color getStartColor() {
     return new Color(startColor.getRGB());
   }
 
+  @Override
   public Point getEndPosition() {
     return endPosition.getLocation();
   }
 
+  @Override
   public Dimension getEndSize() {
     return endSize.getSize();
   }
 
+  @Override
   public Color getEndColor() {
     return new Color(endColor.getRGB());
   }
@@ -80,10 +88,16 @@ public class BasicAnimation implements Animation {
   }
 
   private boolean doPropertiesConflict(Animation other) {
-    return (other.getStartColor() != this.endColor || other.getEndColor() != this.startColor) ||
-            (other.getStartPosition() != this.endPosition || other.getEndPosition() != this.startPosition) ||
-            (other.getStartSize() != this.endSize || other.getEndSize() != this.startSize);
-
+    if (other.endTick() == this.startTick) {
+      return !other.getEndColor().equals(this.startColor) ||
+              other.getEndPosition().equals(this.startPosition) ||
+              other.getEndSize().equals(this.startSize);
+    } else if (other.startTick() == this.endTick){
+      return !other.getStartColor().equals(this.endColor) ||
+              !other.getStartPosition().equals(this.endPosition) ||
+              !other.getStartSize().equals(this.endSize);
+    }
+    return true;
   }
 
   private boolean doPropertiesOverlap(Animation other) {

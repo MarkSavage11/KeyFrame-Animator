@@ -69,7 +69,15 @@ public class BasicAnimation implements Animation {
    * @return true if the animations conflict, false otherwise
    */
   public boolean conflictsWith(Animation other) {
-    throw new UnsupportedOperationException("Not implemented yet");
+    if (other.endTick() < this.startTick || other.startTick() > this.endTick) {
+      return false;
+    } else if (other.startTick() > this.startTick && other.startTick() < this.endTick) {
+
+    }
+  }
+
+  private boolean doPropertiesOverlap(Animation other) {
+
   }
 
 

@@ -5,16 +5,21 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import animation.model.Animation;
+import animation.model.AnimationModel;
+import animation.model.AnimationModelImpl;
 import animation.model.BasicAnimation;
+import animation.model.Homework05.AccessibleAnimation;
 import animation.model.Homework05.AccessibleAnimationImpl;
+import animation.model.Homework05.AnimAccessibleShape;
 import animation.model.Homework05.AnimAccessibleShapeImpl;
-import animation.model.Homework05.StringModel;
 import animation.model.Homework05.StringModelImpl;
 import animation.model.Shape;
 import animation.model.ShapeImpl;
 import animation.model.ShapeType;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class Hw05Tests {
 
@@ -36,7 +41,7 @@ public class Hw05Tests {
 
   @Test
   public void testAnimationModel() {
-    StringModel model = new StringModelImpl();
+    AnimationModel model = new StringModelImpl();
     Shape r = new AnimAccessibleShapeImpl(ShapeType.RECTANGLE);
     Shape c = new AnimAccessibleShapeImpl(ShapeType.ELLIPSE);
     model.addShape("R", r);
@@ -74,7 +79,7 @@ public class Hw05Tests {
     Animation a1 = new BasicAnimation(1, new Point(), new Dimension(), Color.black,
             10, new Point(), new Dimension(), Color.black);
     Animation a2 = new BasicAnimation(2, new Point(), new Dimension(), Color.black,
-            15, new Point(), new Dimension(), Color.black);
+            15, new Pointe(), new Dimension(), Color.black);
     shape.addAnimation(a1);
     shape.addAnimation(a2);
   }
@@ -83,6 +88,78 @@ public class Hw05Tests {
   public void testFailedAddAnimation2() {
     Shape shape = new ShapeImpl(ShapeType.ELLIPSE);
     shape.addAnimation(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testModelAddShapeFail1() {
+    boolean alreadyExistsFail = false;
+    boolean nullNameFail = false;
+    boolean nullShapeFail = false;
+
+    AnimationModel model = new AnimationModelImpl();
+    Shape dummy = new ShapeImpl(ShapeType.RECTANGLE);
+    model.addShape("dummy", dummy);
+
+    try {
+      model.addShape("dummy", new ShapeImpl(ShapeType.RECTANGLE));
+    } catch(IllegalArgumentException e) {
+      alreadyExistsFail = true;
+    }
+
+    try {
+      model.addShape(null, new ShapeImpl(ShapeType.RECTANGLE));
+    } catch(IllegalArgumentException e) {
+      nullNameFail = true;
+    }
+
+    try {
+      model.addShape("dummy", null);
+    } catch(IllegalArgumentException e) {
+      nullShapeFail = true;
+    }
+
+    assertFalse(alreadyExistsFail && nullNameFail && nullShapeFail);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testModelAddShapeFail2() {
+    AnimationModel model = new AnimationModelImpl();
+    Shape dummy = new ShapeImpl(ShapeType.RECTANGLE);
+    model.addShape(null, dummy);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testModelAddAnimationFail() {
+    boolean noMatchFail = false;
+    boolean nullNameFail = false;
+    boolean nullAnimFail = false;
+
+    AnimationModel model = new StringModelImpl();
+    Shape r = new AnimAccessibleShapeImpl(ShapeType.RECTANGLE);
+    model.addShape("R", r);
+    Animation a1 = new BasicAnimation(1, new Point(), new Dimension(), Color.black,
+            10, new Point(), new Dimension(), Color.black);
+
+    //Checks that the given shape name isn't in the model
+    try{
+      model.addAnimation("Doesn't Exist", a1);
+    }catch(IllegalArgumentException e) {
+      noMatchFail = true;
+    }
+    //Checks when the given name is null
+    try{
+      model.addAnimation(null, a1);
+    }catch(IllegalArgumentException e) {
+      nullNameFail = true;
+    }
+    //Checks when the given animation is null
+    try{
+      model.addAnimation("R", null);
+    }catch(IllegalArgumentException e) {
+      nullAnimFail = true;
+    }
+    assertTrue(noMatchFail && nullAnimFail && nullNameFail);
+
   }
 
 }

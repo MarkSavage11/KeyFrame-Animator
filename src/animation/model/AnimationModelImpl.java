@@ -16,12 +16,25 @@ public class AnimationModelImpl implements AnimationModel {
     if (shapes.containsKey(name)) {
       throw new IllegalArgumentException("A shape with that name already exists.");
     }
-
-
   }
 
   @Override
   public void addAnimation(String shapeName, Animation anim) throws IllegalArgumentException {
     
   }
+
+  @Override
+  public String toString() {
+    StringBuilder result = new StringBuilder();
+
+    for(Map.Entry<String, Shape> entry : shapes.entrySet()) {
+      result.append("shape " + entry.getKey() + " " + entry.getValue().getType().toString() + "\n");
+      result.append(entry.getValue().toString());
+      result.append("\n");
+    }
+
+    return result.toString();
+  }
+
 }
+

@@ -1,5 +1,10 @@
 package animation.model;
 
+/**
+ * A model which handles shapes and animations. Can have shapes added to the set of animations it
+ * tracks (the shapes must be named so as to be referenced later) and add animations to shapes based
+ * on their name.
+ */
 public interface AnimationModel {
   /**
    * Adds the given shape to the set of shapes tracked by this model, and assigns it the given name.

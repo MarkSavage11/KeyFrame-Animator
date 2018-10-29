@@ -1,7 +1,7 @@
 package animation.model;
 
 /**
- * An enum of the types of shapes that can be represented.
+ * An enum of the types of shapes that can be represented. Currently only rectangles and ellipses.
  */
 public enum ShapeType {
   RECTANGLE("rectangle"), ELLIPSE("ellipse");

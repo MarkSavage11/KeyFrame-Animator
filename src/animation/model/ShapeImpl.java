@@ -22,7 +22,8 @@ public class ShapeImpl implements Shape {
     }
     for (Animation existingAnim : animations) {
       if (existingAnim.conflictsWith(anim)) {
-        throw new IllegalArgumentException("The given animation conflicts with an existing animation.");
+        throw new IllegalArgumentException
+                ("The given animation conflicts with an existing animation.");
       }
     }
     animations.add(anim);

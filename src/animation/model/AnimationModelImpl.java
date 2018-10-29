@@ -7,14 +7,14 @@ import java.util.Map;
 
 public class AnimationModelImpl implements AnimationModel {
 
-  private Map<String,Shape> shapes;
+  private Map<String, Shape> shapes;
 
   public AnimationModelImpl() {
     shapes = new HashMap<>();
   }
 
   @Override
-  public void addShape (Shape shape) throws IllegalArgumentException {
+  public void addShape(Shape shape) throws IllegalArgumentException {
     if (shape == null) {
       throw new IllegalArgumentException("Shape can't be null");
     }
@@ -41,8 +41,9 @@ public class AnimationModelImpl implements AnimationModel {
   public String toString() {
     List<String> result = new ArrayList<>();
 
-    for(Map.Entry<String, Shape> entry : shapes.entrySet()) {
-      result.add("shape " + entry.getKey() + " " + entry.getValue().getType().toString() + "\n" + entry.getValue().toString());
+    for (Map.Entry<String, Shape> entry : shapes.entrySet()) {
+      result.add("shape " + entry.getKey() + " " +
+              entry.getValue().getType().toString() + "\n" + entry.getValue().toString());
     }
     return String.join("\n\n", result);
   }

@@ -1,7 +1,14 @@
 package animation.model;
 
-import java.awt.*;
+import java.awt.Point;
+import java.awt.Color;
+import java.awt.Dimension;
 
+/**
+ * An animation, which has a start and end time, and may define any of position, size, and color. If
+ * it does not modify a property, both the getStart and getEnd methods for that property will return
+ * null.
+ */
 public interface Animation {
   /**
    * Gets the tick on which this animation begins.
@@ -16,39 +23,46 @@ public interface Animation {
    * @return the tick this animation ends on
    */
   int endTick();
+
   /**
    * Gets the starting position for the animation.
-   * @return the position the animation starts
+   *
+   * @return the position the animation starts, or null if it does not define a position change
    */
   Point getStartPosition();
 
   /**
    * Gets the ending position for the animation.
-   * @return the position the animation ends
+   *
+   * @return the position the animation ends, or null if it does not define a position change
    */
   Point getEndPosition();
 
   /**
    * Gets the starting size for this animation.
-   * @return the size at which the animation starts
+   *
+   * @return the size at which the animation starts, or null if it does not define a size change
    */
   Dimension getStartSize();
 
   /**
    * Gets the ending size for this animation.
-   * @return the size at which the animation ends
+   *
+   * @return the size at which the animation ends, or null if it does not define a size change
    */
   Dimension getEndSize();
 
   /**
    * Gets the starting color for this animation.
-   * @return the color at which the animation starts
+   *
+   * @return the color at which the animation starts, or null if it does not define a color change
    */
   Color getStartColor();
 
   /**
    * Gets the ending color for this animation.
-   * @return the color at which the animation ends
+   *
+   * @return the color at which the animation ends, or null if it does not define a color change
    */
   Color getEndColor();
 

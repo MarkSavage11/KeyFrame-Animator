@@ -1,5 +1,9 @@
 package animation.model;
 
+/**
+ * A shape which can have animations applied to it. Maintains a list of its animations and can add
+ * more if they do not conflict with existing ones.
+ */
 public interface Shape {
   /**
    * Adds the given animation to the set to apply to this shape.
@@ -13,12 +17,14 @@ public interface Shape {
 
   /**
    * Gets the type of shape this represents.
+   *
    * @return A ShapeType corresponding to the type of shape this is
    */
   ShapeType getType();
 
   /**
    * Gets the name of this shape.
+   *
    * @return the name of the shape
    */
   String getName();

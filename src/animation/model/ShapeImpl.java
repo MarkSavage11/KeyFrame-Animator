@@ -17,6 +17,9 @@ public class ShapeImpl implements Shape {
 
   @Override
   public void addAnimation(Animation anim) throws IllegalArgumentException {
+    if (anim == null) {
+      throw new IllegalArgumentException("Animation cannot be null");
+    }
     for (Animation existingAnim : animations) {
       if (existingAnim.conflictsWith(anim)) {
         throw new IllegalArgumentException("The given animation conflicts with an existing animation.");

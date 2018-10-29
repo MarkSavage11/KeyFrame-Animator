@@ -62,8 +62,8 @@ public class Hw05Tests {
     assertEquals(50, endDimClone.height);
 
     endDimClone.setSize(50, 50);
-    assertEquals(100, anim.getEndSize().height);
-    assertEquals(50, anim.getEndSize().width);
+    assertEquals(50, anim.getEndSize().height);
+    assertEquals(100, anim.getEndSize().width);
 
     assertEquals(Color.WHITE, anim.getEndColor());
 

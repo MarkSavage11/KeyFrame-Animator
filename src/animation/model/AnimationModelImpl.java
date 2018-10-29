@@ -25,6 +25,9 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public void addAnimation(String shapeName, Animation anim) throws IllegalArgumentException {
+    if (shapeName == null || anim == null) {
+      throw new IllegalArgumentException("Arguments cannot be null");
+    }
     if (!shapes.containsKey(shapeName)) {
       throw new IllegalArgumentException("No shape with that name exists");
     }

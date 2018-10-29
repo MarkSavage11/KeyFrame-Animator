@@ -34,9 +34,8 @@ public class AnimationModelImpl implements AnimationModel {
     for(Map.Entry<String, Shape> entry : shapes.entrySet()) {
       result.append("shape " + entry.getKey() + " " + entry.getValue().getType().toString() + "\n");
       result.append(entry.getValue().toString());
-      result.append("\n");
+      result.append("\n\n");
     }
-
     return result.toString();
   }
 

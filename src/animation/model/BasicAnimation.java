@@ -47,4 +47,20 @@ public class BasicAnimation implements Animation {
   public boolean conflictsWith(Animation other) {
     throw new UnsupportedOperationException("Not implemented yet");
   }
+
+
+  @Override
+  public String toString() {
+    StringBuilder result = new StringBuilder();
+    result.append("" + startTick() + " " + startPosition.getX() + " " + startPositon.getY() + " "
+            + startSize.getWidth() + " " + startSize.getHeight() + " "
+            + startColor.getRed() + " " + startColor.getGreen() + " " + startColor.getBlue());
+    result.append("    ");
+    result.append("" + endTick() + " " + endPosition.getX() + " " + endPositon.getY() + " "
+            + endSize.getWidth() + " " + endSize.getHeight() + " "
+            + endColor.getRed() + " " + endColor.getGreen() + " " + endColor.getBlue());
+
+    return result.toString();
+
+  }
 }

@@ -1,13 +1,9 @@
 package animation.model;
 
-import java.awt.Point;
-import java.awt.Color;
-import java.awt.Dimension;
-
 /**
- * An animation, which has a start and end time, and may define any of position, size, and color. If
- * it does not modify a property, both the getStart and getEnd methods for that property will return
- * null.
+ * An animation, which has a start and end time, and may define a change (or lack thereof) to any of
+ * position, size, and color. If it does not modify a property, both the getStart and getEnd methods
+ * for that property will return null.
  */
 public interface Animation {
   /**
@@ -24,53 +20,17 @@ public interface Animation {
    */
   int endTick();
 
-  /**
-   * Gets the starting position for the animation.
-   *
-   * @return the position the animation starts, or null if it does not define a position change
-   */
-  Point getStartPosition();
+  boolean hasProperty(AnimatableProperty prop);
 
-  /**
-   * Gets the ending position for the animation.
-   *
-   * @return the position the animation ends, or null if it does not define a position change
-   */
-  Point getEndPosition();
+  Object getPropertyAtStart(AnimatableProperty prop);
 
-  /**
-   * Gets the starting size for this animation.
-   *
-   * @return the size at which the animation starts, or null if it does not define a size change
-   */
-  Dimension getStartSize();
-
-  /**
-   * Gets the ending size for this animation.
-   *
-   * @return the size at which the animation ends, or null if it does not define a size change
-   */
-  Dimension getEndSize();
-
-  /**
-   * Gets the starting color for this animation.
-   *
-   * @return the color at which the animation starts, or null if it does not define a color change
-   */
-  Color getStartColor();
-
-  /**
-   * Gets the ending color for this animation.
-   *
-   * @return the color at which the animation ends, or null if it does not define a color change
-   */
-  Color getEndColor();
+  Object getPropertyAtEnd(AnimatableProperty prop);
 
   /**
    * Would the given animation conflict with this animation if they were placed in the same
-   * timeline? Details of what "conflicting" mean dependent on the implementation, but generally
-   * speaking will return false if the animations try to change the same property at the same time,
-   * and false otherwise.
+   * timeline? Returns false if the animations try to change the same property at the same time, and
+   * false otherwise. Also returns false if the animations overlap by one frame (one starts where
+   * the other ends) and they demand different values for a property at that time.
    *
    * @param other the other animation to compare to
    * @return true if the animations conflict, false otherwise

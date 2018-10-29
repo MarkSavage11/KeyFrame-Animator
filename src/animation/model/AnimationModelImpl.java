@@ -16,8 +16,6 @@ public class AnimationModelImpl implements AnimationModel {
     if (shapes.containsKey(shape.getName())) {
       throw new IllegalArgumentException("A shape with that name already exists.");
     }
-
-
   }
 
   @Override
@@ -28,4 +26,19 @@ public class AnimationModelImpl implements AnimationModel {
 
     shapes.get(shapeName).addAnimation(anim);
   }
+
+  @Override
+  public String toString() {
+    StringBuilder result = new StringBuilder();
+
+    for(Map.Entry<String, Shape> entry : shapes.entrySet()) {
+      result.append("shape " + entry.getKey() + " " + entry.getValue().getType().toString() + "\n");
+      result.append(entry.getValue().toString());
+      result.append("\n");
+    }
+
+    return result.toString();
+  }
+
 }
+

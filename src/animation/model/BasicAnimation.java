@@ -17,7 +17,7 @@ public class BasicAnimation implements Animation {
 
   public BasicAnimation(int startTick, Point startPosition, Dimension startSize, Color startColor,
                         int endTick, Point endPosition, Dimension endSize, Color endColor) {
-    if (endTick < 0 || startTick < 0 || endTick-startTick <= 0) {
+    if (endTick < 0 || startTick < 0 || endTick - startTick <= 0) {
       throw new IllegalArgumentException("Illegal start or end ticks");
     }
     this.startTick = startTick;

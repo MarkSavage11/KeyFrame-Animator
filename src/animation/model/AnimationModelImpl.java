@@ -14,15 +14,15 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public void addShape(Shape shape) throws IllegalArgumentException {
+  public void addShape(String name, Shape shape) throws IllegalArgumentException {
     if (shape == null) {
       throw new IllegalArgumentException("Shape can't be null");
     }
-    if (shapes.containsKey(shape.getName())) {
+    if (shapes.containsKey(name)) {
       throw new IllegalArgumentException("A shape with that name already exists.");
     }
 
-    shapes.put(shape.getName(), shape);
+    shapes.put(name, shape);
   }
 
   @Override
@@ -35,6 +35,15 @@ public class AnimationModelImpl implements AnimationModel {
     }
 
     shapes.get(shapeName).addAnimation(anim);
+  }
+
+  @Override
+  public Map<String,Shape> getState() {
+    Map<String, Shape> shapesClone = new HashMap<>();
+    for (String name : this.shapes.keySet()) {
+      shapesClone.put(name, shapes.get(name).copy());
+    }
+    return shapesClone;
   }
 
   @Override

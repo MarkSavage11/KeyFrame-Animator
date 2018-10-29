@@ -1,5 +1,7 @@
 package animation.model;
 
+import java.util.List;
+
 /**
  * An animation, which has a start and end time, and may define a change (or lack thereof) to any of
  * position, size, and color. If it does not modify a property, both the getStart and getEnd methods
@@ -20,11 +22,15 @@ public interface Animation {
    */
   int endTick();
 
-  boolean hasProperty(AnimatableProperty prop);
+  void addAnimation(AnimateableProperty prop, List<Integer> start, List<Integer> end);
 
-  Object getPropertyAtStart(AnimatableProperty prop);
+  boolean hasProperty(AnimateableProperty prop);
 
-  Object getPropertyAtEnd(AnimatableProperty prop);
+  List<Integer> getPropertyAtStart(AnimateableProperty prop);
+
+  List<Integer> getPropertyAtEnd(AnimateableProperty prop);
+
+  Animation copy();
 
   /**
    * Would the given animation conflict with this animation if they were placed in the same

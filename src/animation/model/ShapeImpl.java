@@ -5,12 +5,10 @@ import java.util.List;
 
 public class ShapeImpl implements Shape {
 
-  private String name;
   private ShapeType type;
   private List<Animation> animations;
 
-  public ShapeImpl(String name, ShapeType type) {
-    this.name = name;
+  public ShapeImpl(ShapeType type) {
     this.type = type;
     animations = new ArrayList<>();
   }
@@ -35,17 +33,20 @@ public class ShapeImpl implements Shape {
   }
 
   @Override
-  public String getName() {
-    return this.name;
+  public Shape copy() {
+    Shape clone = new ShapeImpl(this.type);
+    for (Animation anim : this.animations) {
+      clone.addAnimation(anim);
+    }
+    return clone;
   }
 
   @Override
-  public String toString() {
-    List<String> result = new ArrayList<>();
-    for (Animation anim : animations) {
-      result.add("motion " + this.name + " " + anim.toString());
+  public List<Animation> getAnimations() {
+    List<Animation> animationsCopy = new ArrayList<>();
+    for (Animation anim : this.animations) {
+      animationsCopy.add(anim.copy());
     }
-    return String.join("\n", result);
+    return animationsCopy;
   }
-
 }

@@ -1,5 +1,7 @@
 package animation.model;
 
+import java.util.List;
+
 /**
  * A shape which can have animations applied to it. Maintains a list of its animations and can add
  * more if they do not conflict with existing ones.
@@ -22,10 +24,7 @@ public interface Shape {
    */
   ShapeType getType();
 
-  /**
-   * Gets the name of this shape.
-   *
-   * @return the name of the shape
-   */
-  String getName();
+  Shape copy();
+
+  List<Animation> getAnimations();
 }

@@ -36,27 +36,27 @@ public class BasicAnimation implements Animation {
   }
 
   public Point getStartPosition() {
-    return startPosition;
+    return startPosition.getLocation();
   }
 
   public Dimension getStartSize() {
-    return startSize;
+    return startSize.getSize();
   }
 
   public Color getStartColor() {
-    return startColor;
+    return new Color(startColor.getRGB());
   }
 
   public Point getEndPosition() {
-    return endPosition;
+    return endPosition.getLocation();
   }
 
   public Dimension getEndSize() {
-    return endSize;
+    return endSize.getSize();
   }
 
   public Color getEndColor() {
-    return endColor;
+    return new Color(endColor.getRGB());
   }
 
   /**

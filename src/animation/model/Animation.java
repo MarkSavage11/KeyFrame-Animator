@@ -1,5 +1,7 @@
 package animation.model;
 
+import java.awt.*;
+
 public interface Animation {
   /**
    * Gets the tick on which this animation begins.
@@ -14,6 +16,41 @@ public interface Animation {
    * @return the tick this animation ends on
    */
   int endTick();
+  /**
+   * Gets the starting position for the animation.
+   * @return the position the animation starts
+   */
+  Point startPosn();
+
+  /**
+   * Gets the ending position for the animation.
+   * @return the position the animation ends
+   */
+  Point endPosn();
+
+  /**
+   * Gets the starting size for this animation.
+   * @return the size at which the animation starts
+   */
+  Dimension startSize();
+
+  /**
+   * Gets the ending size for this animation.
+   * @return the size at which the animation ends
+   */
+  Dimension endSize();
+
+  /**
+   * Gets the starting color for this animation.
+   * @return the color at which the animation starts
+   */
+  Color startColor();
+
+  /**
+   * Gets the ending color for this animation.
+   * @return the color at which the animation ends
+   */
+  Color endColor();
 
   /**
    * Would the given animation conflict with this animation if they were placed in the same

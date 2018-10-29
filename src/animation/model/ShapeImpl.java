@@ -34,4 +34,15 @@ public class ShapeImpl implements Shape {
   public String getName() {
     return this.name;
   }
+
+  @Override
+  public String toString() {
+    StringBuilder result = new StringBuilder();
+    for (Animation anim : animations) {
+      result.append("motion " + this.name + " ");
+      result.append(anim.toString() + "\n");
+    }
+    return result.toString();
+  }
+
 }

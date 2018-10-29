@@ -33,7 +33,39 @@ public class Hw05Tests {
 
   @Test
   public void testAnimationConstructor() {
-    //TODO: Test all the getters
+    Animation anim =
+            new BasicAnimation(1, new Point(200, 200), new Dimension(50, 100), Color.RED,
+                    10, new Point(100, 100), new Dimension(100, 50), Color.WHITE);
+    assertEquals(1, anim.startTick());
+    assertEquals(10, anim.endTick());
+
+    Point startPosClone = anim.getStartPosition();
+    assertEquals(startPosClone.x, 200);
+    assertEquals(startPosClone.y, 200);
+
+    startPosClone.translate(50, 50);
+    assertEquals(200, anim.getStartPosition().x);
+    assertEquals(200, anim.getStartPosition().y);
+
+    Dimension startDimClone = anim.getEndSize();
+    assertEquals(100, startDimClone.height);
+    assertEquals(50, startDimClone.width);
+
+    assertEquals(Color.RED, anim.getStartColor());
+
+    Point endPosClone = anim.getEndPosition();
+    assertEquals(endPosClone.x, 100);
+    assertEquals(endPosClone.y, 100);
+
+    Dimension endDimClone = anim.getEndSize();
+    assertEquals(100, endDimClone.width);
+    assertEquals(50, endDimClone.height);
+
+    endDimClone.setSize(50, 50);
+    assertEquals(100, anim.getEndSize().height);
+    assertEquals(50, anim.getEndSize().width);
+
+    assertEquals(Color.WHITE, anim.getEndColor());
 
   }
 

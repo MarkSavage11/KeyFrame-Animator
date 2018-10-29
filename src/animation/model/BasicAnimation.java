@@ -3,23 +3,31 @@ package animation.model;
 import java.awt.Point;
 import java.awt.Dimension;
 import java.awt.Color;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class BasicAnimation implements Animation {
 
   private int startTick;
+  private Point startPosition;
+  private Dimension startSize;
+  private Color startColor;
   private int endTick;
+  private Point endPosition;
+  private Dimension endSize;
+  private Color endColor;
 
-  private Map<AnimatableProperty, List<Integer>> startState;
-  private Map<AnimatableProperty, List<Integer>> endState;
-
-  public BasicAnimation(int startTick, int endTick) {
+  public BasicAnimation(int startTick, Point startPosition, Dimension startSize, Color startColor,
+                        int endTick, Point endPosition, Dimension endSize, Color endColor) {
+    if (endTick < 0 || startTick < 0 || endTick-startTick <= 0) {
+      throw new IllegalArgumentException("Illegal start or end ticks");
+    }
     this.startTick = startTick;
+    this.startPosition = startPosition;
+    this.startSize = startSize;
+    this.startColor = startColor;
     this.endTick = endTick;
-    this.startState = new HashMap<>();
-    this.endState = new HashMap<>();
+    this.endPosition = endPosition;
+    this.endSize = endSize;
+    this.endColor = endColor;
   }
 
   @Override
@@ -30,6 +38,36 @@ public class BasicAnimation implements Animation {
   @Override
   public int endTick() {
     return endTick;
+  }
+
+  @Override
+  public Point getStartPosition() {
+    return startPosition.getLocation();
+  }
+
+  @Override
+  public Dimension getStartSize() {
+    return startSize.getSize();
+  }
+
+  @Override
+  public Color getStartColor() {
+    return new Color(startColor.getRGB());
+  }
+
+  @Override
+  public Point getEndPosition() {
+    return endPosition.getLocation();
+  }
+
+  @Override
+  public Dimension getEndSize() {
+    return endSize.getSize();
+  }
+
+  @Override
+  public Color getEndColor() {
+    return new Color(endColor.getRGB());
   }
 
   /**
@@ -50,6 +88,25 @@ public class BasicAnimation implements Animation {
     } else {
       return doPropertiesConflict(other);
     }
+  }
+
+  private boolean doPropertiesConflict(Animation other) {
+    if (other.endTick() == this.startTick) {
+      return !(other.getEndColor().equals(this.startColor) &&
+              other.getEndPosition().equals(this.startPosition) &&
+              other.getEndSize().equals(this.startSize));
+    } else if (other.startTick() == this.endTick) {
+      return !(other.getStartColor().equals(this.endColor) &&
+              other.getStartPosition().equals(this.endPosition) &&
+              other.getStartSize().equals(this.endSize));
+    }
+    return true;
+  }
+
+  private boolean doPropertiesOverlap(Animation other) {
+    return other.getStartSize() != null ||
+            other.getStartPosition() != null ||
+            other.getStartColor() != null;
   }
 
 

@@ -3,12 +3,21 @@ package animation.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The basic implementation of Shape: holds a name, type, and list of animations.
+ */
 public class ShapeImpl implements Shape {
 
   private String name;
   private ShapeType type;
   private List<Animation> animations;
 
+  /**
+   * Constructs a ShapeImpl with the given name and type.
+   *
+   * @param name the name or identification of this shape
+   * @param type the type of shape this is.
+   */
   public ShapeImpl(String name, ShapeType type) {
     this.name = name;
     this.type = type;
@@ -22,8 +31,8 @@ public class ShapeImpl implements Shape {
     }
     for (Animation existingAnim : animations) {
       if (existingAnim.conflictsWith(anim)) {
-        throw new IllegalArgumentException
-                ("The given animation conflicts with an existing animation.");
+        throw new IllegalArgumentException("The given animation " +
+                "conflicts with an existing animation.");
       }
     }
     animations.add(anim);

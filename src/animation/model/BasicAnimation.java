@@ -4,6 +4,10 @@ import java.awt.Point;
 import java.awt.Dimension;
 import java.awt.Color;
 
+/**
+ * Basic implementation of Animation, which holds values of the states of position, size, and
+ * color.
+ */
 public class BasicAnimation implements Animation {
 
   private int startTick;
@@ -15,8 +19,24 @@ public class BasicAnimation implements Animation {
   private Dimension endSize;
   private Color endColor;
 
+  /**
+   * Constructs a basic animation with the given start and end states for given position, size, and
+   * color.
+   *
+   * @param startTick     the tick or frame this animation starts on.
+   * @param startPosition the position this animation states with.
+   * @param startSize     the size this animation starts with.
+   * @param startColor    the starting color of this animation.
+   * @param endTick       the tick or frame this animation ends on.
+   * @param endPosition   the position where this animation ends.
+   * @param endSize       the size this animation ends with.
+   * @param endColor      the end color of this animation.
+   * @throws IllegalArgumentException if either given tick is negative or the end tick is before the
+   *                                  starting tick.
+   */
   public BasicAnimation(int startTick, Point startPosition, Dimension startSize, Color startColor,
-                        int endTick, Point endPosition, Dimension endSize, Color endColor) {
+                        int endTick, Point endPosition, Dimension endSize, Color endColor)
+          throws IllegalArgumentException {
     if (endTick < 0 || startTick < 0 || endTick - startTick <= 0) {
       throw new IllegalArgumentException("Illegal start or end ticks");
     }

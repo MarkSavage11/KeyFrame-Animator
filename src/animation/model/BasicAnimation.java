@@ -35,6 +35,30 @@ public class BasicAnimation implements Animation {
     return endTick;
   }
 
+  public Point getStartPosition() {
+    return startPosition;
+  }
+
+  public Dimension getStartSize() {
+    return startSize;
+  }
+
+  public Color getStartColor() {
+    return startColor;
+  }
+
+  public Point getEndPosition() {
+    return endPosition;
+  }
+
+  public Dimension getEndSize() {
+    return endSize;
+  }
+
+  public Color getEndColor() {
+    return endColor;
+  }
+
   /**
    * Determines whether the animation conflicts with another animation. Will return false if the
    * animation tries to modify position, color, or size at the same time as this, or if such an

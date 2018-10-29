@@ -92,14 +92,14 @@ public class Hw05Tests {
     model.addAnimation("R", animR1);
     model.addAnimation("R", animR2);
     model.addAnimation("C", animC1);
-    model.addAnimation("C", animC1);
+    model.addAnimation("C", animC2);
 
     assertEquals("Shape R rectangle\n"
             + "motion R 1 200 200 50 100 255 0 0    10 200 200 50 100 255 0 0\n"
             + "motion R 10 200 200 50 100 255 0 0    50 300 300 50 100 255 0 0 \n\n"
             + "shape C ellipse\n"
             + "motion C 6 440 70 120 60 0 0 255    20 440 70 120 60 0 0 255\n"
-            + "motion C 20 440 70 120 60 0 0 255    50 440 250 120 60 0 0 255",
+            + "motion C 20 440 70 120 60 0 0 255    50 440 250 120 60 0 0 0",
             model.toString());
   }
 

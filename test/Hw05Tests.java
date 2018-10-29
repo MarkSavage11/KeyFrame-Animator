@@ -13,7 +13,6 @@ import animation.model.ShapeImpl;
 import animation.model.ShapeType;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class Hw05Tests {
@@ -69,6 +68,24 @@ public class Hw05Tests {
 
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testBadAnimationConstructor1() {
+    new BasicAnimation(1, new Point(), new Dimension(), Color.WHITE,
+            1, new Point(), new Dimension(), Color.WHITE);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testBadAnimationConstructor2() {
+    new BasicAnimation(10, new Point(), new Dimension(), Color.WHITE,
+            8, new Point(), new Dimension(), Color.WHITE);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testBadAnimationConstructor3() {
+    new BasicAnimation(-1, new Point(), new Dimension(), Color.WHITE,
+            1, new Point(), new Dimension(), Color.WHITE);
+  }
+
   @Test
   public void testAnimationModel() {
     AnimationModel model = new AnimationModelImpl();
@@ -118,6 +135,43 @@ public class Hw05Tests {
   public void testFailedAddAnimation2() {
     Shape shape = new ShapeImpl("R", ShapeType.ELLIPSE);
     shape.addAnimation(null);
+  }
+
+  @Test
+  public void testFailedAddAnimation3() {
+    boolean incongruentPoint = false;
+    boolean incongruentSize = false;
+    boolean incongruentColor = false;
+
+    Shape shape = new ShapeImpl("R", ShapeType.RECTANGLE);
+    Animation a1 = new BasicAnimation(1, new Point(50,50), new Dimension(10,10), Color.black,
+            10, new Point(50 , 50), new Dimension(50, 50), Color.black);
+    shape.addAnimation(a1);
+
+    Animation badPoint = new BasicAnimation(10, new Point(40, 50), new Dimension(10, 10), Color.black,
+            15, new Point(40, 50), new Dimension(10,10), Color.black);
+    try{
+      shape.addAnimation(badPoint);
+    }catch(IllegalArgumentException e) {
+      incongruentPoint = true;
+    }
+
+    Animation badSize = new BasicAnimation(10, new Point(50,50), new Dimension(40,50), Color.black,
+            15, new Point(50 , 50), new Dimension(50, 50), Color.black);
+    try{
+      shape.addAnimation(badSize);
+    }catch(IllegalArgumentException e) {
+      incongruentSize = true;
+    }
+
+    Animation badColor = new BasicAnimation(10, new Point(50,50), new Dimension(50,50), Color.WHITE,
+            15, new Point(50 , 50), new Dimension(50, 50), Color.black);
+    try{
+      shape.addAnimation(badColor);
+    }catch(IllegalArgumentException e) {
+      incongruentColor = true;
+    }
+    assertTrue(incongruentColor && incongruentPoint && incongruentSize);
   }
 
   @Test

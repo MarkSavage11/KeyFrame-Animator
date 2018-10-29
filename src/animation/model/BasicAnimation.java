@@ -4,21 +4,35 @@ import java.awt.*;
 
 public class BasicAnimation implements Animation {
 
-
+  private int startTick;
+  private Point startPosition;
+  private Dimension startSize;
+  private Color startColor;
+  private int endTick;
+  private Point endPosition;
+  private Dimension endSize;
+  private Color endColor;
 
   public BasicAnimation(int startTick, Point startPosition, Dimension startSize, Color startColor,
-                 int endTick, Point endPosition, Dimension endSize, Color endColor) {
-
+                        int endTick, Point endPosition, Dimension endSize, Color endColor) {
+    this.startTick = startTick;
+    this.startPosition = startPosition;
+    this.startSize = startSize;
+    this.startColor = startColor;
+    this.endTick = endTick;
+    this.endPosition = endPosition;
+    this.endSize = endSize;
+    this.endColor = endColor;
   }
 
   @Override
   public int startTick() {
-    return 0;
+    return startTick;
   }
 
   @Override
   public int endTick() {
-    return 0;
+    return endTick;
   }
 
   /**
@@ -31,6 +45,6 @@ public class BasicAnimation implements Animation {
    * @return true if the animations conflict, false otherwise
    */
   public boolean conflictsWith(Animation other) {
-    return false;
+    throw new UnsupportedOperationException("Not implemented yet");
   }
 }

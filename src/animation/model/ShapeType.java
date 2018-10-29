@@ -6,7 +6,7 @@ package animation.model;
 public enum ShapeType {
   RECTANGLE("rectangle"), ELLIPSE("ellipse");
 
-  String type;
+  private String type;
 
   ShapeType(String type) {
     this.type = type;

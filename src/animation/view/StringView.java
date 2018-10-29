@@ -10,8 +10,17 @@ import animation.model.AnimateableProperty;
 import animation.model.Animation;
 import animation.model.Shape;
 
+/**
+ * A view which can take a Model state and return a string representation.
+ */
 public class StringView {
 
+  /**
+   * Takes a model's state and returns a string representation of it.
+   *
+   * @param animationState a Model state to display
+   * @return a string describing the model
+   */
   public String display(Map<String, Shape> animationState) {
 
     List<String> shapeStrs = new ArrayList<>();

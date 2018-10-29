@@ -24,7 +24,17 @@ public interface Shape {
    */
   ShapeType getType();
 
+  /**
+   * Copies this shape so that the model can be revealed to the view safely
+   *
+   * @return a copy of this shape
+   */
   Shape copy();
 
+  /**
+   * Returns a copy of this Shape's animations so that the view can display it.
+   *
+   * @return a copy of this shape's animations
+   */
   List<Animation> getAnimations();
 }

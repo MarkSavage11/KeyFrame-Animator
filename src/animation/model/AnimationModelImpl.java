@@ -38,7 +38,7 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public Map<String,Shape> getState() {
+  public Map<String, Shape> getState() {
     Map<String, Shape> shapesClone = new HashMap<>();
     for (String name : this.shapes.keySet()) {
       shapesClone.put(name, shapes.get(name).copy());

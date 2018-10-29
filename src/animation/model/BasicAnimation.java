@@ -72,21 +72,18 @@ public class BasicAnimation implements Animation {
   }
 
   public void addAnimation(AnimateableProperty prop, List<Integer> start, List<Integer> end) {
+    if (this.startState.containsKey(prop)) {
+      throw new IllegalArgumentException("An animation for that property already exists.");
+    }
     if (prop.validState(start) && prop.validState(end)) {
       this.startState.put(prop, start);
       this.endState.put(prop, end);
+    } else {
+      throw new IllegalArgumentException("Invalid state definitions for the given property.");
     }
   }
 
-  /**
-   * Determines whether the animation conflicts with another animation. Will return false if the
-   * animation tries to modify position, color, or size at the same time as this, or if such an
-   * animation overlaps at the edge (by exactly one tick) but defines a different property for that
-   * tick.
-   *
-   * @param other the other Animation to compare to
-   * @return true if the animations conflict, false otherwise
-   */
+  @Override
   public boolean conflictsWith(Animation other) {
     if ((other.startTick() > this.startTick && other.startTick() < this.endTick) ||
             (other.endTick() < this.endTick && other.endTick() > this.startTick)) { //overlap

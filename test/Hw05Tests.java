@@ -8,11 +8,6 @@ import animation.model.Animation;
 import animation.model.AnimationModel;
 import animation.model.AnimationModelImpl;
 import animation.model.BasicAnimation;
-import animation.model.Homework05.AccessibleAnimation;
-import animation.model.Homework05.AccessibleAnimationImpl;
-import animation.model.Homework05.AnimAccessibleShape;
-import animation.model.Homework05.AnimAccessibleShapeImpl;
-import animation.model.Homework05.StringModelImpl;
 import animation.model.Shape;
 import animation.model.ShapeImpl;
 import animation.model.ShapeType;
@@ -41,23 +36,23 @@ public class Hw05Tests {
 
   @Test
   public void testAnimationModel() {
-    AnimationModel model = new StringModelImpl();
-    Shape r = new AnimAccessibleShapeImpl(ShapeType.RECTANGLE);
-    Shape c = new AnimAccessibleShapeImpl(ShapeType.ELLIPSE);
+    AnimationModel model = new AnimationModelImpl();
+    Shape r = new ShapeImpl(ShapeType.RECTANGLE);
+    Shape c = new ShapeImpl(ShapeType.ELLIPSE);
     model.addShape("R", r);
     model.addShape("C", c);
     Animation animR1 =
-            new AccessibleAnimationImpl(1, new Point(200, 200), new Dimension(50, 100), Color.RED,
+            new BasicAnimation(1, new Point(200, 200), new Dimension(50, 100), Color.RED,
                     10, new Point(200, 200), new Dimension(50, 100), Color.RED);
     Animation animR2 =
-            new AccessibleAnimationImpl(10, new Point(200, 200), new Dimension(50, 100), Color.RED,
+            new BasicAnimation(10, new Point(200, 200), new Dimension(50, 100), Color.RED,
                     50, new Point(300, 300), new Dimension(50, 100), Color.RED);
 
     Animation animC1 =
-            new AccessibleAnimationImpl(6, new Point(440, 70), new Dimension(120, 60), Color.BLUE,
+            new BasicAnimation(6, new Point(440, 70), new Dimension(120, 60), Color.BLUE,
                     20, new Point(440, 70), new Dimension(120, 60), Color.GREEN);
     Animation animC2 =
-            new AccessibleAnimationImpl(20, new Point(440, 70), new Dimension(120, 60), Color.GREEN,
+            new BasicAnimation(20, new Point(440, 70), new Dimension(120, 60), Color.GREEN,
                     50, new Point(440, 250), new Dimension(60, 0), Color.BLACK);
     model.addAnimation("R", animR1);
     model.addAnimation("R", animR2);
@@ -70,7 +65,7 @@ public class Hw05Tests {
             + "shape C ellipse\n"
             + "motion C 6  440 70 120 60 0 0 255      20  440 70  120 60 0 0 255\n"
             + "motion C 20 440 70 120 60 0 0 255      50  440 250 120 60 0 0 255",
-            model.getState());
+            model.toString());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -79,7 +74,7 @@ public class Hw05Tests {
     Animation a1 = new BasicAnimation(1, new Point(), new Dimension(), Color.black,
             10, new Point(), new Dimension(), Color.black);
     Animation a2 = new BasicAnimation(2, new Point(), new Dimension(), Color.black,
-            15, new Pointe(), new Dimension(), Color.black);
+            15, new Point(), new Dimension(), Color.black);
     shape.addAnimation(a1);
     shape.addAnimation(a2);
   }
@@ -134,8 +129,8 @@ public class Hw05Tests {
     boolean nullNameFail = false;
     boolean nullAnimFail = false;
 
-    AnimationModel model = new StringModelImpl();
-    Shape r = new AnimAccessibleShapeImpl(ShapeType.RECTANGLE);
+    AnimationModel model = new AnimationModelImpl();
+    Shape r = new ShapeImpl(ShapeType.RECTANGLE);
     model.addShape("R", r);
     Animation a1 = new BasicAnimation(1, new Point(), new Dimension(), Color.black,
             10, new Point(), new Dimension(), Color.black);

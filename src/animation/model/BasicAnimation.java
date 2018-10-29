@@ -4,7 +4,9 @@ import java.awt.*;
 
 public class BasicAnimation implements Animation {
 
-  BasicAnimation(int startTick, Point startPosition, Dimension startSize, Color startColor,
+
+
+  public BasicAnimation(int startTick, Point startPosition, Dimension startSize, Color startColor,
                  int endTick, Point endPosition, Dimension endSize, Color endColor) {
 
   }

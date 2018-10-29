@@ -1,22 +1,27 @@
 package animation.model;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AnimationModelImpl implements AnimationModel {
 
-  private List<Shape> shapes;
+  private Map<String,Shape> shapes;
 
-  AnimationModelImpl() {
-
+  public AnimationModelImpl() {
+    shapes = new HashMap<>();
   }
 
   @Override
   public void addShape(String name, Shape shape) throws IllegalArgumentException {
+    if (shapes.containsKey(name)) {
+      throw new IllegalArgumentException("A shape with that name already exists.");
+    }
+
 
   }
 
   @Override
   public void addAnimation(String shapeName, Animation anim) throws IllegalArgumentException {
-
+    
   }
 }

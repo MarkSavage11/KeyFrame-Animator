@@ -116,12 +116,6 @@ public class Hw05Tests {
     assertFalse(alreadyExistsFail && nullNameFail && nullShapeFail);
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void testModelAddShapeFail2() {
-    AnimationModel model = new AnimationModelImpl();
-    Shape dummy = new ShapeImpl(ShapeType.RECTANGLE);
-    model.addShape(null, dummy);
-  }
 
   @Test (expected = IllegalArgumentException.class)
   public void testModelAddAnimationFail() {

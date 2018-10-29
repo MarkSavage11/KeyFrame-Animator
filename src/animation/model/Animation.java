@@ -20,37 +20,37 @@ public interface Animation {
    * Gets the starting position for the animation.
    * @return the position the animation starts
    */
-  Point startPosn();
+  Point getStartPosition();
 
   /**
    * Gets the ending position for the animation.
    * @return the position the animation ends
    */
-  Point endPosn();
+  Point getEndPosition();
 
   /**
    * Gets the starting size for this animation.
    * @return the size at which the animation starts
    */
-  Dimension startSize();
+  Dimension getStartSize();
 
   /**
    * Gets the ending size for this animation.
    * @return the size at which the animation ends
    */
-  Dimension endSize();
+  Dimension getEndSize();
 
   /**
    * Gets the starting color for this animation.
    * @return the color at which the animation starts
    */
-  Color startColor();
+  Color getStartColor();
 
   /**
    * Gets the ending color for this animation.
    * @return the color at which the animation ends
    */
-  Color endColor();
+  Color getEndColor();
 
   /**
    * Would the given animation conflict with this animation if they were placed in the same

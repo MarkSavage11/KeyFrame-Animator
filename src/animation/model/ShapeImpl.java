@@ -40,12 +40,11 @@ public class ShapeImpl implements Shape {
 
   @Override
   public String toString() {
-    StringBuilder result = new StringBuilder();
+    List<String> result = new ArrayList<>();
     for (Animation anim : animations) {
-      result.append("motion " + this.name + " ");
-      result.append(anim.toString() + "\n");
+      result.add("motion " + this.name + " " + anim.toString());
     }
-    return result.toString();
+    return String.join("\n", result);
   }
 
 }

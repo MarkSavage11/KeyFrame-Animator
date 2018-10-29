@@ -1,6 +1,8 @@
 package animation.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AnimationModelImpl implements AnimationModel {
@@ -37,14 +39,12 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public String toString() {
-    StringBuilder result = new StringBuilder();
+    List<String> result = new ArrayList<>();
 
     for(Map.Entry<String, Shape> entry : shapes.entrySet()) {
-      result.append("shape " + entry.getKey() + " " + entry.getValue().getType().toString() + "\n");
-      result.append(entry.getValue().toString());
-      result.append("\n\n");
+      result.add("shape " + entry.getKey() + " " + entry.getValue().getType().toString() + "\n" + entry.getValue().toString());
     }
-    return result.toString();
+    return String.join("\n\n", result);
   }
 
 }

@@ -5,21 +5,19 @@ import java.util.List;
 
 public class ShapeImpl implements Shape {
 
-
-
+  private String name;
   private ShapeType type;
-  //this has to be protected for the purposes of generating a string representation of the state -
-  //I don't like it any more than you do.
-  protected List<Animation> animations;
+  private List<Animation> animations;
 
-  public ShapeImpl(ShapeType type) {
+  public ShapeImpl(String name, ShapeType type) {
+    this.name = name;
     this.type = type;
     animations = new ArrayList<>();
   }
 
   @Override
   public void addAnimation(Animation anim) throws IllegalArgumentException {
-    for(Animation existingAnim : animations) {
+    for (Animation existingAnim : animations) {
       if (existingAnim.conflictsWith(anim)) {
         throw new IllegalArgumentException("The given animation conflicts with an existing animation.");
       }
@@ -30,5 +28,10 @@ public class ShapeImpl implements Shape {
   @Override
   public ShapeType getType() {
     return this.type;
+  }
+
+  @Override
+  public String getName() {
+    return this.name;
   }
 }

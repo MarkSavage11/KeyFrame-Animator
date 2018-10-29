@@ -16,4 +16,10 @@ public interface Shape {
    * @return A ShapeType corresponding to the type of shape this is
    */
   ShapeType getType();
+
+  /**
+   * Gets the name of this shape.
+   * @return the name of the shape
+   */
+  String getName();
 }

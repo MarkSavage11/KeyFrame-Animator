@@ -12,8 +12,8 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public void addShape(String name, Shape shape) throws IllegalArgumentException {
-    if (shapes.containsKey(name)) {
+  public void addShape (Shape shape) throws IllegalArgumentException {
+    if (shapes.containsKey(shape.getName())) {
       throw new IllegalArgumentException("A shape with that name already exists.");
     }
 
@@ -22,6 +22,10 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public void addAnimation(String shapeName, Animation anim) throws IllegalArgumentException {
-    
+    if (!shapes.containsKey(shapeName)) {
+      throw new IllegalArgumentException("No shape with that name exists");
+    }
+
+    shapes.get(shapeName).addAnimation(anim);
   }
 }

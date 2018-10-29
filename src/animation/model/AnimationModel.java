@@ -5,12 +5,11 @@ public interface AnimationModel {
    * Adds the given shape to the set of shapes tracked by this model, and assigns it the given name.
    * When later referencing the shape, method invocations should use the name assigned here.
    *
-   * @param name  The name to give the shape
    * @param shape The shape to add to the model
    * @throws IllegalArgumentException if there already exists a shape with the given name, or if
    *                                  either the shape or the name is null
    */
-  void addShape(String name, Shape shape) throws IllegalArgumentException;
+  void addShape(Shape shape) throws IllegalArgumentException;
 
   /**
    * Adds the given animation to the set of animations to apply to the named shape.

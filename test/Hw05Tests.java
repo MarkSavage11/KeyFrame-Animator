@@ -21,11 +21,14 @@ public class Hw05Tests {
 
   @Test
   public void testShapeConstructor() {
-    Shape rect = new ShapeImpl(ShapeType.RECTANGLE);
-    Shape ellipse = new ShapeImpl(ShapeType.ELLIPSE);
+    Shape rect = new ShapeImpl("R", ShapeType.RECTANGLE);
+    Shape ellipse = new ShapeImpl("C", ShapeType.ELLIPSE);
 
     assertEquals(ShapeType.RECTANGLE, rect.getType());
     assertEquals(ShapeType.ELLIPSE, ellipse.getType());
+
+    assertEquals("R", rect.getName());
+    assertEquals("C", ellipse.getName());
   }
 
   @Test
@@ -37,10 +40,10 @@ public class Hw05Tests {
   @Test
   public void testAnimationModel() {
     AnimationModel model = new AnimationModelImpl();
-    Shape r = new ShapeImpl(ShapeType.RECTANGLE);
-    Shape c = new ShapeImpl(ShapeType.ELLIPSE);
-    model.addShape("R", r);
-    model.addShape("C", c);
+    Shape r = new ShapeImpl("R", ShapeType.RECTANGLE);
+    Shape c = new ShapeImpl("C", ShapeType.ELLIPSE);
+    model.addShape(r);
+    model.addShape(c);
     Animation animR1 =
             new BasicAnimation(1, new Point(200, 200), new Dimension(50, 100), Color.RED,
                     10, new Point(200, 200), new Dimension(50, 100), Color.RED);
@@ -70,7 +73,7 @@ public class Hw05Tests {
 
   @Test(expected = IllegalArgumentException.class)
   public void testFailedAddAnimation1() {
-    Shape shape = new ShapeImpl(ShapeType.RECTANGLE);
+    Shape shape = new ShapeImpl("R", ShapeType.RECTANGLE);
     Animation a1 = new BasicAnimation(1, new Point(), new Dimension(), Color.black,
             10, new Point(), new Dimension(), Color.black);
     Animation a2 = new BasicAnimation(2, new Point(), new Dimension(), Color.black,
@@ -81,39 +84,32 @@ public class Hw05Tests {
 
   @Test(expected = IllegalArgumentException.class)
   public void testFailedAddAnimation2() {
-    Shape shape = new ShapeImpl(ShapeType.ELLIPSE);
+    Shape shape = new ShapeImpl("R", ShapeType.ELLIPSE);
     shape.addAnimation(null);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testModelAddShapeFail1() {
     boolean alreadyExistsFail = false;
-    boolean nullNameFail = false;
     boolean nullShapeFail = false;
 
     AnimationModel model = new AnimationModelImpl();
-    Shape dummy = new ShapeImpl(ShapeType.RECTANGLE);
-    model.addShape("dummy", dummy);
+    Shape dummy = new ShapeImpl("dummy", ShapeType.RECTANGLE);
+    model.addShape(dummy);
 
     try {
-      model.addShape("dummy", new ShapeImpl(ShapeType.RECTANGLE));
+      model.addShape(new ShapeImpl("dummy", ShapeType.RECTANGLE));
     } catch(IllegalArgumentException e) {
       alreadyExistsFail = true;
     }
 
     try {
-      model.addShape(null, new ShapeImpl(ShapeType.RECTANGLE));
-    } catch(IllegalArgumentException e) {
-      nullNameFail = true;
-    }
-
-    try {
-      model.addShape("dummy", null);
+      model.addShape(null);
     } catch(IllegalArgumentException e) {
       nullShapeFail = true;
     }
 
-    assertFalse(alreadyExistsFail && nullNameFail && nullShapeFail);
+    assertFalse(alreadyExistsFail && nullShapeFail);
   }
 
 
@@ -124,8 +120,8 @@ public class Hw05Tests {
     boolean nullAnimFail = false;
 
     AnimationModel model = new AnimationModelImpl();
-    Shape r = new ShapeImpl(ShapeType.RECTANGLE);
-    model.addShape("R", r);
+    Shape r = new ShapeImpl("R", ShapeType.RECTANGLE);
+    model.addShape(r);
     Animation a1 = new BasicAnimation(1, new Point(), new Dimension(), Color.black,
             10, new Point(), new Dimension(), Color.black);
 

@@ -1,4 +1,4 @@
-package animation.model;
+package cs3500.animator.model;
 
 /**
  * An enum of the types of shapes that can be represented. Currently only rectangles and ellipses.

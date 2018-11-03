@@ -1,4 +1,7 @@
-package animation.model;
+package cs3500.animator.model;
+
+import java.awt.*;
+import java.util.Map;
 
 /**
  * A model which handles shapes and animations. Can have shapes added to the set of animations it
@@ -25,4 +28,11 @@ public interface AnimationModel {
    *                                  argument is null.
    */
   void addAnimation(String shapeName, Animation anim) throws IllegalArgumentException;
+
+  //tentative
+
+  Map<String, Shape> getState();
+
+  Point canvasPosition();
+  Dimension canvasSize();
 }

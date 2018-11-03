@@ -4,13 +4,13 @@ import java.awt.Point;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import animation.model.Animation;
-import animation.model.AnimationModel;
-import animation.model.AnimationModelImpl;
-import animation.model.BasicAnimation;
-import animation.model.Shape;
-import animation.model.ShapeImpl;
-import animation.model.ShapeType;
+import cs3500.animator.model.Animation;
+import cs3500.animator.model.AnimationModel;
+import cs3500.animator.model.AnimationModelImpl;
+import cs3500.animator.model.BasicAnimation;
+import cs3500.animator.model.Shape;
+import cs3500.animator.model.ShapeImpl;
+import cs3500.animator.model.ShapeType;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

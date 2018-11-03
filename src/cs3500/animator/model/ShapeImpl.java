@@ -1,4 +1,4 @@
-package animation.model;
+package cs3500.animator.model;
 
 import java.util.ArrayList;
 import java.util.List;

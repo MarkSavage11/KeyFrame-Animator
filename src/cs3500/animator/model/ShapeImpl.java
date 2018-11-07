@@ -5,12 +5,10 @@ import java.util.List;
 
 public class ShapeImpl implements Shape {
 
-  private String name;
   private ShapeType type;
   private List<Animation> animations;
 
-  public ShapeImpl(String name, ShapeType type) {
-    this.name = name;
+  public ShapeImpl(ShapeType type) {
     this.type = type;
     animations = new ArrayList<>();
   }
@@ -21,12 +19,25 @@ public class ShapeImpl implements Shape {
       throw new IllegalArgumentException("Animation cannot be null");
     }
     for (Animation existingAnim : animations) {
-      if (existingAnim.conflictsWith(anim)) {
+      if (animationsConflict(existingAnim, anim)) {
         throw new IllegalArgumentException
                 ("The given animation conflicts with an existing animation.");
       }
     }
     animations.add(anim);
+  }
+
+  private boolean animationsConflict(Animation a, Animation b) {
+    if ((a.endTick() > b.startTick() && a.endTick() < b.endTick()) ||
+            (a.startTick() > b.startTick() && a.startTick() < b.endTick())) {
+      return true;
+    } else if (a.endTick() == b.startTick()) {
+      return !a.endState().equals(b.startState());
+    } else if (a.startTick() == b.endTick()) {
+      return !a.startState().equals(b.endState());
+    } else {
+      return false;
+    }
   }
 
   @Override
@@ -35,17 +46,17 @@ public class ShapeImpl implements Shape {
   }
 
   @Override
-  public String getName() {
-    return this.name;
+  public List<Animation> getAnimations() {
+    return new ArrayList<>(animations);
   }
 
   @Override
-  public String toString() {
-    List<String> result = new ArrayList<>();
-    for (Animation anim : animations) {
-      result.add("motion " + this.name + " " + anim.toString());
+  public State getStateAt(int tick) {
+    for (Animation anim: animations) {
+      if (tick >= anim.startTick() && tick <= anim.endTick()) {
+        return anim.getStateAt(tick);
+      }
     }
-    return String.join("\n", result);
+    throw new IllegalArgumentException("Tick out of bounds for animations on this shape.");
   }
-
 }

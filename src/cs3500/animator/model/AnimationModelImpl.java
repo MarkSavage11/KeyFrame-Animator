@@ -1,28 +1,31 @@
 package cs3500.animator.model;
 
-import java.util.ArrayList;
+import java.awt.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class AnimationModelImpl implements AnimationModel {
 
   private Map<String, Shape> shapes;
+  private Point canvasPosition;
+  private Dimension canvasSize;
 
-  public AnimationModelImpl() {
+  public AnimationModelImpl(Point canvasPosition, Dimension canvasSize) {
+    this.canvasPosition = canvasPosition;
+    this.canvasSize = canvasSize;
     shapes = new HashMap<>();
   }
 
   @Override
-  public void addShape(Shape shape) throws IllegalArgumentException {
-    if (shape == null) {
-      throw new IllegalArgumentException("Shape can't be null");
+  public void addShape(String name, ShapeType shape) throws IllegalArgumentException {
+    if (name == null || shape == null) {
+      throw new IllegalArgumentException("Arguments cannot be null");
     }
-    if (shapes.containsKey(shape.getName())) {
+    if (shapes.containsKey(name)) {
       throw new IllegalArgumentException("A shape with that name already exists.");
     }
 
-    shapes.put(shape.getName(), shape);
+    shapes.put(name, new ShapeImpl(shape));
   }
 
   @Override
@@ -38,15 +41,18 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
-  public String toString() {
-    List<String> result = new ArrayList<>();
-
-    for (Map.Entry<String, Shape> entry : shapes.entrySet()) {
-      result.add("shape " + entry.getKey() + " " +
-              entry.getValue().getType().toString() + "\n" + entry.getValue().toString());
-    }
-    return String.join("\n\n", result);
+  public Map<String, ReadOnlyShape> getShapes() {
+    return new HashMap<>(shapes);
   }
 
+  @Override
+  public Point canvasPosition() {
+    return new Point(canvasPosition);
+  }
+
+  @Override
+  public Dimension canvasSize() {
+    return new Dimension(canvasSize);
+  }
 }
 

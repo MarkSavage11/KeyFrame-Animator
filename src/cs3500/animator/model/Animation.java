@@ -1,9 +1,8 @@
 package cs3500.animator.model;
 
 /**
- * An animation, which has a start and end time, and may define any of position, size, and color. If
- * it does not modify a property, both the getStart and getEnd methods for that property will return
- * null.
+ * An animation, which has a start and end time and state.
+ * It will be attached to a shape to define its behavior over a specific duration.
  */
 public interface Animation {
   /**
@@ -23,19 +22,6 @@ public interface Animation {
   State startState();
 
   State endState();
-
-  /**
-   * Would the given animation conflict with this animation if they were placed in the same
-   * timeline? Details of what "conflicting" mean dependent on the implementation, but generally
-   * speaking will return true if the animations try to change the same property at the same time,
-   * and false otherwise.
-   *
-   * @param other the other animation to compare to
-   * @return true if the animations conflict, false otherwise
-   */
-  boolean conflictsWith(Animation other);
-
-  //tentative
 
   State getStateAt(int tick);
 }

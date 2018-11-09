@@ -48,21 +48,27 @@ public class AnimationPanel extends JPanel {
 
     for(Map.Entry<String, ReadOnlyShape> shapeEntry : model.getShapes().entrySet()){
       ReadOnlyShape shape = shapeEntry.getValue();
-      State state = shape.getStateAt(tick);
-      
+      State state;
+      try {
+        state = shape.getStateAt(tick);
+      } catch(IllegalArgumentException e){
+        state = null;
+      }
       g2d.setColor(state.getColor());
       //TODO make this a command pattern so that we can abstract it more. but for right now....
-      switch(shape.getType()){
-        case ELLIPSE:
-          g2d.fillOval(state.getPosition().x, state.getPosition().y,
-                  state.getSize().width, state.getSize().height);
-          break;
-        case RECTANGLE:
-          g2d.fillRect(state.getPosition().x, state.getPosition().y,
-                  state.getSize().width, state.getSize().height);
-          break;
-        default:
-          break;
+      if(state!= null) {
+        switch (shape.getType()) {
+          case ELLIPSE:
+            g2d.fillOval(state.getPosition().x, state.getPosition().y,
+                    state.getSize().width, state.getSize().height);
+            break;
+          case RECTANGLE:
+            g2d.fillRect(state.getPosition().x, state.getPosition().y,
+                    state.getSize().width, state.getSize().height);
+            break;
+          default:
+            break;
+        }
       }
     }
 

@@ -15,7 +15,7 @@ import cs3500.animator.model.State;
 public class AnimationPanel extends JPanel {
 
   ReadOnlyAnimationModel model;
-  int tick = 0;
+  int tick = 1;
 
   /**
    * Constructs an AnimationPanel that displays the models animations.

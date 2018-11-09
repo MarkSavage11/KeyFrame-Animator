@@ -19,17 +19,29 @@ public class AnimationModelImpl implements AnimationModel {
     shapes = new HashMap<>();
   }
 
-  @Override
-  public void addShape(String name, ShapeType shape) throws IllegalArgumentException {
-    if (name == null || shape == null) {
-      throw new IllegalArgumentException("Arguments cannot be null");
-    }
-    if (shapes.containsKey(name)) {
-      throw new IllegalArgumentException("A shape with that name already exists.");
-    }
+//  @Override
+//  public void addShape(String name, ShapeType shape) throws IllegalArgumentException {
+//    if (name == null || shape == null) {
+//      throw new IllegalArgumentException("Arguments cannot be null");
+//    }
+//    if (shapes.containsKey(name)) {
+//      throw new IllegalArgumentException("A shape with that name already exists.");
+//    }
+//
+//    shapes.put(name, new ShapeImpl(shape));
+//  }
 
-    shapes.put(name, new ShapeImpl(shape));
+@Override
+public void addShape(String name, Shape shape) throws IllegalArgumentException {
+  if (name == null || shape == null) {
+    throw new IllegalArgumentException("Arguments cannot be null");
   }
+  if (shapes.containsKey(name)) {
+    throw new IllegalArgumentException("A shape with that name already exists.");
+  }
+
+  shapes.put(name, shape);
+}
 
   @Override
   public void addAnimation(String shapeName, Animation anim) throws IllegalArgumentException {
@@ -58,6 +70,10 @@ public class AnimationModelImpl implements AnimationModel {
     return new Dimension(canvasSize);
   }
 
+
+  /**
+   * Builder for animation model.
+   */
   public static final class Builder implements AnimationBuilder<AnimationModel> {
     @Override
     public AnimationModel build() {
@@ -83,7 +99,6 @@ public class AnimationModelImpl implements AnimationModel {
     public AnimationBuilder<AnimationModel> addKeyframe(String name, int t, int x, int y, int w, int h, int r, int g, int b) {
       return null;
     }
-    // FILL IN HERE
   }
 }
 

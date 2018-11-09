@@ -18,26 +18,14 @@ public class ShapeImpl implements Shape {
     if (anim == null) {
       throw new IllegalArgumentException("Animation cannot be null");
     }
-    for (Animation existingAnim : animations) {
-      if (animationsConflict(existingAnim, anim)) {
-        throw new IllegalArgumentException
-                ("The given animation conflicts with an existing animation.");
-      }
-    }
-    animations.add(anim);
-  }
 
-  private boolean animationsConflict(Animation a, Animation b) {
-    if ((a.endTick() > b.startTick() && a.endTick() < b.endTick()) ||
-            (a.startTick() > b.startTick() && a.startTick() < b.endTick())) {
-      return true;
-    } else if (a.endTick() == b.startTick()) {
-      return !a.endState().equals(b.startState());
-    } else if (a.startTick() == b.endTick()) {
-      return !a.startState().equals(b.endState());
-    } else {
-      return false;
+    if (animations.size() > 0 &&
+            (anim.startTick() != animations.get(animations.size() - 1).endTick() ||
+                    !anim.startState().equals(animations.get(animations.size() - 1).endState()))) {
+      throw new IllegalArgumentException("Non-continuous animations");
     }
+
+    animations.add(anim);
   }
 
   @Override
@@ -52,7 +40,7 @@ public class ShapeImpl implements Shape {
 
   @Override
   public State getStateAt(int tick) {
-    for (Animation anim: animations) {
+    for (Animation anim : animations) {
       if (tick >= anim.startTick() && tick <= anim.endTick()) {
         return anim.getStateAt(tick);
       }

@@ -7,15 +7,28 @@ import cs3500.animator.model.Animation;
 import cs3500.animator.model.ReadOnlyAnimationModel;
 import cs3500.animator.model.ReadOnlyShape;
 
+/**
+ * An animation view that displays a textual representation of the given animation model.
+ */
 public class TextAnimationView implements AnimationView{
 
   private Appendable output;
 
+  /**
+   * Constructs a TextAnimationView with an appendable to write to.
+   *
+   * @param output the appendable this view writes the models information to
+   */
   public TextAnimationView(Appendable output) {
     this.output = output;
   }
 
-  @Override
+  /**
+   * Displays a textual representation of the given models information.
+   *
+   * @param model the animation model to display.
+   * @throws IllegalStateException if the appendable cannot be written to for any reason.
+   */
   public void display(ReadOnlyAnimationModel model) throws IllegalStateException {
     try {
       output.append(String.format("canvas %d %d %d %d\n", model.canvasPosition().x,

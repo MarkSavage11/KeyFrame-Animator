@@ -19,9 +19,25 @@ public interface Animation {
    */
   int endTick();
 
+  /**
+   * Gets the state with which this animation begins.
+   *
+   * @return the state with which this animation begins
+   */
   State startState();
 
+  /**
+   * Gets the state with which this animation ends.
+   *
+   * @return the state with which this animation ends
+   */
   State endState();
 
+  /**
+   * Gets the state of this animation on the given tick.
+   *
+   * @param tick time in ticks in this animation
+   * @return the state on the given tick
+   */
   State getStateAt(int tick);
 }

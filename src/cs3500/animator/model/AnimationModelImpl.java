@@ -7,14 +7,22 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import cs3500.animator.util.AnimationBuilder;
-import cs3500.animator.util.AnimationReader;
 
+/**
+ * Standard Animation Model implementation that holds a canvas position and size and its shapes.
+ */
 public class AnimationModelImpl implements AnimationModel {
 
   private Map<String, Shape> shapes;
   private Point canvasPosition;
   private Dimension canvasSize;
 
+  /**
+   * Constructs an empty animation model with the given canvas dimensions and position.
+   *
+   * @param canvasPosition the position where a canvas representing this model would appear
+   * @param canvasSize this size a canvas representing this model would appear with
+   */
   public AnimationModelImpl(Point canvasPosition, Dimension canvasSize) {
     this.canvasPosition = canvasPosition;
     this.canvasSize = canvasSize;

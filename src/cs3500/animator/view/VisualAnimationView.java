@@ -4,6 +4,9 @@ import javax.swing.*;
 
 import cs3500.animator.model.ReadOnlyAnimationModel;
 
+/**
+ * An animation view that displays a full visual animation of the given model.
+ */
 public class VisualAnimationView extends JFrame implements AnimationView{
 
   private ReadOnlyAnimationModel model;
@@ -20,8 +23,13 @@ public class VisualAnimationView extends JFrame implements AnimationView{
     this.speed = speed;
   }
 
-  @Override
-  public void display(ReadOnlyAnimationModel model) {
+  /**
+   * Displays the given model's animation in a fully animated view.
+   *
+   * @param model the animation model to display.
+   * @throws IllegalStateException this method does not throw this exception.
+   */
+  public void display(ReadOnlyAnimationModel model) throws IllegalStateException{
     this.setTitle("Excellent");
     this.setSize(500, 500);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

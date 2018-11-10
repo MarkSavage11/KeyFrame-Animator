@@ -3,11 +3,19 @@ package cs3500.animator.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Standard implementation of the shape interface. Holds its type and its animations.
+ */
 public class ShapeImpl implements Shape {
 
   private ShapeType type;
   private List<Animation> animations;
 
+  /**
+   * Constructs an empty shape with the given type.
+   *
+   * @param type the type of shape this shape is.
+   */
   public ShapeImpl(ShapeType type) {
     this.type = type;
     animations = new ArrayList<>();

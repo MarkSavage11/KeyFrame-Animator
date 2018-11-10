@@ -7,7 +7,6 @@ import cs3500.animator.model.Animation;
 import cs3500.animator.model.AnimationModel;
 import cs3500.animator.model.AnimationModelImpl;
 import cs3500.animator.model.BasicAnimation;
-import cs3500.animator.model.ShapeImpl;
 import cs3500.animator.model.ShapeType;
 import cs3500.animator.model.StateImpl;
 import cs3500.animator.view.AnimationView;
@@ -23,8 +22,8 @@ public class Hw06Tests {
   @Before
   public void init() {
     this.model = new AnimationModelImpl(new Point(200, 200), new Dimension(600,600));
-    model.addShape("R", new ShapeImpl(ShapeType.RECTANGLE));
-    model.addShape("C", new ShapeImpl(ShapeType.ELLIPSE));
+    model.addShape("R", ShapeType.RECTANGLE);
+    model.addShape("C", ShapeType.ELLIPSE);
     Animation animR1 =
             new BasicAnimation(1, new StateImpl(new Point(200, 200),
                     new Dimension(50, 100), Color.RED), 10,

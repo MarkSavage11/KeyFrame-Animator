@@ -68,18 +68,17 @@ public class Hw06Tests {
     AnimationView view = new SVGAnimationView(ap, 1);
     view.display(model);
 
-    assertEquals("<?xml version=\"1.0\" standalone=\"no\"?>\n"
-            + "<svg viewBox=\"0 0 300 100\" xmlns=\"http://www.w3.org/2000/svg\">\n"
+    assertEquals("<svg width=\"600\" height=\"600\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n"
             + "<rect id=\"R\" x=\"200\" y=\"200\" width=\"50\" height=\"100\" fill=\"rbg(255,0,0)\">\n"
-            + "<animate attributeType=\"XML\" begin=\"10s\" dur=\"40s\" attributeName=\"x\" from=\"200\" to=\"300\"/>\n"
-            + "<animate attributeType=\"XML\" begin=\"10s\" dur=\"40s\" attributeName=\"y\" from=\"200\" to=\"300\"/>\n"
+            + "<animate attributeType=\"xml\" begin=\"10s\" dur=\"40s\" attributeName=\"x\" from=\"200\" to=\"300\"/>\n"
+            + "<animate attributeType=\"xml\" begin=\"10s\" dur=\"40s\" attributeName=\"y\" from=\"200\" to=\"300\"/>\n"
             + "</rect>\n"
             + "<ellipse id=\"C\" cx=\"400\" cy=\"70\" rx=\"120\" ry=\"60\" fill=\"rbg(0,0,255)\">\n"
-            + "<animate attributeType=\"XML\" begin=\"6s\" dur=\"14s\" attributeName=\"fill\" from=\"rgb(0,0,255)\" to=\"rgb(0,255,0)\"/>\n"
-            + "<animate attributeType=\"XML\" begin=\"20s\" dur=\"30s\" attributeName=\"cy\" from=\"70\" to=\"250\"/>\n"
-            + "<animate attributeType=\"XML\" begin=\"20s\" dur=\"30s\" attributeName=\"rx\" from=\"120\" to=\"60\"/>\n"
-            + "<animate attributeType=\"XML\" begin=\"20s\" dur=\"30s\" attributeName=\"ry\" from=\"60\" to=\"0\"/>\n"
-            + "<animate attributeType=\"XML\" begin=\"20s\" dur=\"30s\" attributeName=\"fill\" from=\"rgb(0,255,0)\" to=\"rgb(0,0,0)\"/>\n"
+            + "<animate attributeType=\"xml\" begin=\"6s\" dur=\"14s\" attributeName=\"fill\" from=\"rgb(0,0,255)\" to=\"rgb(0,255,0)\"/>\n"
+            + "<animate attributeType=\"xml\" begin=\"20s\" dur=\"30s\" attributeName=\"cy\" from=\"70\" to=\"250\"/>\n"
+            + "<animate attributeType=\"xml\" begin=\"20s\" dur=\"30s\" attributeName=\"rx\" from=\"120\" to=\"60\"/>\n"
+            + "<animate attributeType=\"xml\" begin=\"20s\" dur=\"30s\" attributeName=\"ry\" from=\"60\" to=\"0\"/>\n"
+            + "<animate attributeType=\"xml\" begin=\"20s\" dur=\"30s\" attributeName=\"fill\" from=\"rgb(0,255,0)\" to=\"rgb(0,0,0)\"/>\n"
             + "</ellipse>\n"
             + "</svg>", ap);
   }

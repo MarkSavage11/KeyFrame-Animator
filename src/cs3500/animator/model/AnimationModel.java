@@ -11,11 +11,11 @@ public interface AnimationModel extends ReadOnlyAnimationModel {
    * When later referencing the shape, method invocations should use the name assigned here.
    *
    * @param name The name of the shape to be added to the model
-   * @param shape The shape to add to the model
+   * @param shape The type of shape to add to the model
    * @throws IllegalArgumentException if there already exists a shape with the given name, or if
    *                                  either the shape or the name is null
    */
-  void addShape(String name, Shape shape) throws IllegalArgumentException;
+  void addShape(String name, ShapeType shape) throws IllegalArgumentException;
 
   /**
    * Adds the given animation to the set of animations to apply to the named shape.

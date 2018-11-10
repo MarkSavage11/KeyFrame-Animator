@@ -21,29 +21,17 @@ public class AnimationModelImpl implements AnimationModel {
     shapes = new HashMap<>();
   }
 
-//  @Override
-//  public void addShape(String name, ShapeType shape) throws IllegalArgumentException {
-//    if (name == null || shape == null) {
-//      throw new IllegalArgumentException("Arguments cannot be null");
-//    }
-//    if (shapes.containsKey(name)) {
-//      throw new IllegalArgumentException("A shape with that name already exists.");
-//    }
-//
-//    shapes.put(name, new ShapeImpl(shape));
-//  }
+  @Override
+  public void addShape(String name, ShapeType shape) throws IllegalArgumentException {
+    if (name == null || shape == null) {
+      throw new IllegalArgumentException("Arguments cannot be null");
+    }
+    if (shapes.containsKey(name)) {
+      throw new IllegalArgumentException("A shape with that name already exists.");
+    }
 
-@Override
-public void addShape(String name, Shape shape) throws IllegalArgumentException {
-  if (name == null || shape == null) {
-    throw new IllegalArgumentException("Arguments cannot be null");
+    shapes.put(name, new ShapeImpl(shape));
   }
-  if (shapes.containsKey(name)) {
-    throw new IllegalArgumentException("A shape with that name already exists.");
-  }
-
-  shapes.put(name, shape);
-}
 
   @Override
   public void addAnimation(String shapeName, Animation anim) throws IllegalArgumentException {

@@ -9,9 +9,11 @@ import javax.swing.*;
 
 import cs3500.animator.model.ReadOnlyAnimationModel;
 import cs3500.animator.model.ReadOnlyShape;
-import cs3500.animator.model.ShapeType;
 import cs3500.animator.model.State;
 
+/**
+ * A JPanel that displays an animation of the given Animation model at the given speed.
+ */
 public class AnimationPanel extends JPanel {
 
   ReadOnlyAnimationModel model;

@@ -2,6 +2,11 @@ package cs3500.animator.model;
 
 import java.awt.*;
 
+/**
+ * An animation that would be stored in a shape in an animation model. This type of animation
+ * holds the starting and ending times and states, holding all information relating to position
+ * size and color.
+ */
 public class BasicAnimation implements Animation {
 
   private int startTick;
@@ -9,8 +14,18 @@ public class BasicAnimation implements Animation {
   private int endTick;
   private State endState;
 
+  /**
+   * Constructs a basic animation with a given start tick, start state, end tick, and end state.
+   *
+   * @param startTick the tick this animation starts on
+   * @param startState the state this animation begins with
+   * @param endTick the tick this animation ends on
+   * @param endState the state this animation ends with
+   * @throws IllegalArgumentException if the given tick values are negative or where the end tick
+   *                                   is before the start tick
+   */
   public BasicAnimation(int startTick, State startState,
-                        int endTick, State endState) {
+                        int endTick, State endState) throws IllegalArgumentException{
     if (endTick < 0 || startTick < 0 || endTick - startTick <= 0) {
       throw new IllegalArgumentException("Illegal start or end ticks");
     }

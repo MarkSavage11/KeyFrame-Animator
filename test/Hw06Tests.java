@@ -7,7 +7,6 @@ import cs3500.animator.model.Animation;
 import cs3500.animator.model.AnimationModel;
 import cs3500.animator.model.AnimationModelImpl;
 import cs3500.animator.model.BasicAnimation;
-import cs3500.animator.model.ShapeImpl;
 import cs3500.animator.model.ShapeType;
 import cs3500.animator.model.StateImpl;
 import cs3500.animator.view.AnimationView;

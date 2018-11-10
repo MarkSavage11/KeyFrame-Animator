@@ -8,18 +8,33 @@ import cs3500.animator.model.ReadOnlyAnimationModel;
 import cs3500.animator.model.ReadOnlyShape;
 import cs3500.animator.model.State;
 
+/**
+ * A view that appends the given model information into an SVG format.
+ */
 public class SVGAnimationView implements AnimationView{
 
   private Appendable ap;
   private final int speed;
 
+  /**
+   * Constructs an SVGAnimationView with a given appendable to write to, and a given framerate.
+   *
+   * @param ap an appendable to write the SVG formatting to
+   * @param speed the framerate of the animation
+   */
   public SVGAnimationView(Appendable ap, int speed){
     this.ap = ap;
     this.speed = speed;
   }
 
-  @Override
-  public void display(ReadOnlyAnimationModel model) {
+
+  /**
+   * Writes the given model information into the view's appendable.
+   *
+   * @param model the animation model to display.
+   * @throws IllegalStateException if the appendable cannot be written to for any reason.
+   */
+  public void display(ReadOnlyAnimationModel model) throws IllegalStateException{
     try {
       ap.append("<svg width=\"" + model.canvasSize().width + "\" height=\""
               + model.canvasSize().height + "\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n");
@@ -72,7 +87,7 @@ public class SVGAnimationView implements AnimationView{
     }
   }
 
-  public String writeAnimation(Animation anim, String xAttName, String yAttName, String wAttName,
+  private String writeAnimation(Animation anim, String xAttName, String yAttName, String wAttName,
                                String hAttName){
     int delay = 1000/this.speed;
     StringBuilder sb = new StringBuilder();

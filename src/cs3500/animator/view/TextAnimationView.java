@@ -26,7 +26,7 @@ public class TextAnimationView implements AnimationView{
 
         for (Animation anim : shape.getValue().getAnimations()) {
           output.append(
-                  String.format("motion %S %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",
+                  String.format("motion %S %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",
                           shape.getKey(), anim.startTick(),
                           anim.startState().getPosition().x, anim.startState().getPosition().y,
                           anim.startState().getSize().width, anim.startState().getSize().height,

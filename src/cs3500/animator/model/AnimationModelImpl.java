@@ -98,6 +98,7 @@ public class AnimationModelImpl implements AnimationModel {
             out.addAnimation(name, new BasicAnimation(prev, animations.get(name).get(prev),
                     anim, animations.get(name).get(anim)));
           }
+          prev = anim;
         }
       }
 
@@ -123,10 +124,6 @@ public class AnimationModelImpl implements AnimationModel {
         shapes.put(name, ShapeType.RECTANGLE);
       } else if (type.equals("ellipse")) {
         shapes.put(name, ShapeType.ELLIPSE);
-      }
-
-      if (!animations.containsKey(name)) {
-        animations.put(name, new TreeMap<>());
       }
 
       return this;

@@ -23,8 +23,8 @@ public class Hw06Tests {
   @Before
   public void init() {
     this.model = new AnimationModelImpl(new Point(200, 200), new Dimension(600,600));
-    model.addShape("R", new ShapeImpl(ShapeType.RECTANGLE));
-    model.addShape("C", new ShapeImpl(ShapeType.ELLIPSE));
+    model.addShape("R", ShapeType.RECTANGLE);
+    model.addShape("C", ShapeType.ELLIPSE);
     Animation animR1 =
             new BasicAnimation(1, new StateImpl(new Point(200, 200),
                     new Dimension(50, 100), Color.RED), 10,

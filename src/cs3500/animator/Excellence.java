@@ -1,10 +1,13 @@
 package cs3500.animator;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.swing.*;
 
 import cs3500.animator.model.AnimationModel;
 import cs3500.animator.model.AnimationModelImpl;
@@ -78,6 +81,13 @@ public final class Excellence {
     try {
       if (view != null && model != null) {
         view.display(model);
+        if (out instanceof FileWriter) {
+          try {
+            ((FileWriter) out).close();
+          } catch (IOException e) {
+            showError("cannot close file");
+          }
+        }
       }
     } catch (IllegalStateException e) {
       showError(e.getMessage());
@@ -85,6 +95,7 @@ public final class Excellence {
   }
 
   private static void showError(String error) {
-
+    JOptionPane.showMessageDialog(new JFrame(), error, "Error", JOptionPane.ERROR_MESSAGE);
+    System.exit(-1);
   }
 }

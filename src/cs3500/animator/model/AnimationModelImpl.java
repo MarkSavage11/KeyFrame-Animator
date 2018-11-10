@@ -82,14 +82,24 @@ public class AnimationModelImpl implements AnimationModel {
     int width;
     int height;
 
+    public Builder() {
+      shapes = new HashMap<>();
+      animations = new HashMap<>();
+
+      x = 0;
+      y = 0;
+      width = 0;
+      height = 0;
+    }
+
     @Override
     public AnimationModel build() {
       AnimationModel out = new AnimationModelImpl(new Point(x, y), new Dimension(width, height));
-      for (String name: shapes.keySet()) {
+      for (String name : shapes.keySet()) {
         out.addShape(name, shapes.get(name));
       }
 
-      for (String name:animations.keySet()) {
+      for (String name : animations.keySet()) {
         int prev = animations.get(name).firstKey();
         for (int anim : animations.get(name).keySet()) {
           if (anim != prev) {

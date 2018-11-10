@@ -4,6 +4,6 @@ import cs3500.animator.model.ReadOnlyAnimationModel;
 
 public interface AnimationView {
 
-    void display(ReadOnlyAnimationModel model);
+    void display(ReadOnlyAnimationModel model) throws IllegalStateException;
 
 }

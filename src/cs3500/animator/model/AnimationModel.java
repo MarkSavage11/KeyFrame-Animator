@@ -21,9 +21,15 @@ public interface AnimationModel extends ReadOnlyAnimationModel {
    * Adds the given animation to the set of animations to apply to the named shape.
    *
    * @param shapeName The name of the shape to apply the animation to
-   * @param anim      The animation to apply
-   * @throws IllegalArgumentException If there exists no shape with the given name, or if either
-   *                                  argument is null.
+   * @throws IllegalArgumentException If there exists no shape with the given name,
+   * or if the given animation does not fit, or if the tick times are out of order,
+   * or if any tick time is negative.
    */
   void addAnimation(String shapeName, Animation anim) throws IllegalArgumentException;
+
+  void addKeyframe(String shapeName, int tick, State keyframe) throws IllegalArgumentException;
+
+  void insertKeyframe(String shapeName, int tick, State keyframe) throws IllegalArgumentException;
+
+  void deleteKeyframe(String shapeName, int tick) throws IllegalArgumentException;
 }

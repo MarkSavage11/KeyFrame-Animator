@@ -9,7 +9,6 @@ import cs3500.animator.model.ReadOnlyAnimationModel;
  */
 public class VisualAnimationView extends JFrame implements AnimationView{
 
-  private ReadOnlyAnimationModel model;
   private JPanel panel;
   private JScrollPane scrollPane;
 

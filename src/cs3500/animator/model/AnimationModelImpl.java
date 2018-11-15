@@ -2,6 +2,7 @@ package cs3500.animator.model;
 
 import java.awt.*;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -26,7 +27,7 @@ public class AnimationModelImpl implements AnimationModel {
   public AnimationModelImpl(Point canvasPosition, Dimension canvasSize) {
     this.canvasPosition = canvasPosition;
     this.canvasSize = canvasSize;
-    shapes = new HashMap<>();
+    shapes = new LinkedHashMap<>();
   }
 
   @Override
@@ -55,7 +56,7 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public Map<String, ReadOnlyShape> getShapes() {
-    return new HashMap<>(shapes);
+    return new LinkedHashMap<>(shapes);
   }
 
   @Override
@@ -83,7 +84,7 @@ public class AnimationModelImpl implements AnimationModel {
     int height;
 
     public Builder() {
-      shapes = new HashMap<>();
+      shapes = new LinkedHashMap<>();
       animations = new HashMap<>();
 
       x = 0;

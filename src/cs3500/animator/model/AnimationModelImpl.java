@@ -1,6 +1,7 @@
 package cs3500.animator.model;
 
 import java.awt.*;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -55,8 +56,24 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
+  public void addAnimation(String shapeName,
+                           int startTick, Point startPosition, Dimension startSize,
+                           Color startColor, int endTick, Point endPosition, Dimension endSize,
+                           Color endColor)
+          throws IllegalArgumentException {
+    this.addAnimation(shapeName, new BasicAnimation(startTick,
+            new StateImpl(startPosition, startSize, startColor),
+            endTick, new StateImpl(endPosition, endSize, endColor)));
+  }
+
+  @Override
   public Map<String, ReadOnlyShape> getShapes() {
-    return new LinkedHashMap<>(shapes);
+    return Collections.unmodifiableMap(shapes);
+  }
+
+  @Override
+  public ReadOnlyShape getShape(String name) {
+    return shapes.get(name);
   }
 
   @Override
@@ -69,6 +86,15 @@ public class AnimationModelImpl implements AnimationModel {
     return new Dimension(canvasSize);
   }
 
+  @Override
+  public void insertKeyframe(String shapeName, int tick, State keyframe) throws IllegalArgumentException {
+    shapes.get(shapeName).insertKeyframe(tick, keyframe);
+  }
+
+  @Override
+  public void deleteKeyframe(String shapeName, int tick) throws IllegalArgumentException {
+    shapes.get(shapeName).deleteKeyframe(tick);
+  }
 
   /**
    * Builder for animation model.

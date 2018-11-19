@@ -37,7 +37,7 @@ public class StateImpl implements State {
 
   @Override
   public Color getColor() {
-    return new Color(color.getRGB());
+    return color;
   }
 
   @Override

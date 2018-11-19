@@ -14,4 +14,8 @@ interface Shape extends ReadOnlyShape {
    *                                  state of the shape, or if the animation is null.
    */
   void addAnimation(Animation anim) throws IllegalArgumentException;
+
+  void insertKeyframe(int tick, State frame);
+
+  void deleteKeyframe(int tick);
 }

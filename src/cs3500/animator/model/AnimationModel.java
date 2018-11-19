@@ -1,5 +1,7 @@
 package cs3500.animator.model;
 
+import java.awt.*;
+
 /**
  * A model which handles shapes and animations. Can have shapes added to the set of animations it
  * tracks (the shapes must be named so as to be referenced later) and add animations to shapes based
@@ -27,7 +29,10 @@ public interface AnimationModel extends ReadOnlyAnimationModel {
    */
   void addAnimation(String shapeName, Animation anim) throws IllegalArgumentException;
 
-  void addKeyframe(String shapeName, int tick, State keyframe) throws IllegalArgumentException;
+  void addAnimation(String shapeName,
+                    int startTick, Point startPosition, Dimension startSize, Color startColor,
+                    int endTick, Point endPosition, Dimension endSize, Color endColor)
+          throws IllegalArgumentException;
 
   void insertKeyframe(String shapeName, int tick, State keyframe) throws IllegalArgumentException;
 

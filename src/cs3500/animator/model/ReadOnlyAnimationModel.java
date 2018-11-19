@@ -16,6 +16,8 @@ public interface ReadOnlyAnimationModel {
    */
   Map<String, ReadOnlyShape> getShapes();
 
+  ReadOnlyShape getShape(String name);
+
   /**
    * Gets the canvas position.
    *

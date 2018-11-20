@@ -102,6 +102,8 @@ public class EditableAnimationView extends JFrame implements AnimationView {
 
   private boolean isLooping = false;
   private Timer timer;
+  private int firstTick = 1;
+  private int lastTick = 1;
 
   /**
    * Constructs a visual animation view that shows an animation of the given model.
@@ -114,7 +116,11 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     this.setPreferredSize(new Dimension(1150, 600));
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.timer = new Timer(1000/speed, (ActionEvent e) -> {
-        displayPanel.setTick(displayPanel.getTick()+1);
+        if(displayPanel.getTick() >= lastTick){
+          displayPanel.setTick(firstTick);
+        }else {
+          displayPanel.setTick(displayPanel.getTick() + 1);
+        }
         displayPanel.repaint();
       });
     this.timer.start();
@@ -128,6 +134,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
    */
   public void display(ReadOnlyAnimationModel model) throws IllegalStateException{
     this.model = model;
+    resetTickBounds();
     displayPanel = new AnimationPanel(model);
     displayPanel.setPreferredSize(new Dimension(500,500));
     displayScrollPane = new JScrollPane(displayPanel);
@@ -150,6 +157,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     deleteShapeButton.addActionListener((ActionEvent e) -> {
       deleteShape();
       this.shapeList.setListData(getShapesInfoAsArray());
+      resetTickBounds();
     });
     shapeDisplayPanel.add(deleteShapeButton, BorderLayout.PAGE_END);
 
@@ -167,6 +175,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     deleteKeyFrameButton.addActionListener((ActionEvent e) -> {
       deleteKeyFrame();
       this.keyFrameList.setListData(getKeyFrameInfoAsArray());
+      resetTickBounds();
     });
     keyFrameDisplayPanel.add(deleteKeyFrameButton, BorderLayout.PAGE_END);
 
@@ -183,6 +192,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     addShapeButton.addActionListener((ActionEvent e) -> {
       addShape();
       this.shapeList.setListData(getShapesInfoAsArray());
+      resetTickBounds();
     });
 
     addShapePanel.add(nameLabel);
@@ -215,6 +225,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     editKeyFrameButton.addActionListener((ActionEvent e) -> {
       editKeyFrame();
       this.keyFrameList.setListData(getKeyFrameInfoAsArray());
+      resetTickBounds();
     });
     editKeyFramePanel.add(editKeyFrameButton);
 
@@ -239,6 +250,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     addKeyFrameButton.addActionListener((ActionEvent e) -> {
       addKeyFrame();
       this.keyFrameList.setListData(getKeyFrameInfoAsArray());
+      resetTickBounds();
     });
     addKeyFramePanel.add(addKeyFrameButton);
 
@@ -259,6 +271,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     this.restartButton = new JButton("Restart");
     restartButton.addActionListener((ActionEvent e) -> {
       displayPanel.setTick(1);
+      timer.restart();
     });
     this.playButton = new JButton("Play");
     playButton.addActionListener((ActionEvent e) -> {
@@ -383,13 +396,8 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     controller.deleteKeyFrame(shapeName, tick);
   }
 
-  /**
-   * Displays an error message in a separate dialogue box.
-   * .
-   * @param error the error message to display
-   */
-  public void showError(String error) {
-    JOptionPane.showMessageDialog(new JFrame(), error, "Error", JOptionPane.ERROR_MESSAGE);
+  public void resetTickBounds(){
+    this.firstTick = model.getFirstTick();
+    this.lastTick = model.getLastTick();
   }
-
 }

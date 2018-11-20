@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -94,6 +95,14 @@ public class AnimationModelImpl implements AnimationModel {
   @Override
   public void deleteKeyframe(String shapeName, int tick) throws IllegalArgumentException {
     shapes.get(shapeName).deleteKeyframe(tick);
+  }
+
+  @Override
+  public void deleteShape(String shapeName) throws IllegalArgumentException {
+    Objects.requireNonNull(shapeName);
+    if(shapes.containsKey(shapeName)) {
+      shapes.remove(shapeName);
+    }
   }
 
   /**

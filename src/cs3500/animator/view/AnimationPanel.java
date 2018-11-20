@@ -1,8 +1,6 @@
 package cs3500.animator.view;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Map;
 
 import javax.swing.*;
@@ -18,24 +16,15 @@ public class AnimationPanel extends JPanel {
 
   ReadOnlyAnimationModel model;
   int tick = 1;
+  boolean isLooping = false;
 
   /**
    * Constructs an AnimationPanel that displays the models animations.
    *
    * @param model the model to animate
-   * @param speed the framerate of the animation
    */
-  public AnimationPanel(ReadOnlyAnimationModel model, int speed){
+  public AnimationPanel(ReadOnlyAnimationModel model){
     this.model = model;
-
-    Timer timer = new Timer(1000/speed, new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        tick++;
-        repaint();
-      }
-    });
-    timer.start();
   }
 
   @Override
@@ -45,6 +34,7 @@ public class AnimationPanel extends JPanel {
 
   @Override
   protected void paintComponent(Graphics g) {
+
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g.create();
 
@@ -74,6 +64,14 @@ public class AnimationPanel extends JPanel {
       }
     }
 
+  }
+
+  public void setTick(int tick){
+    this.tick = tick;
+  }
+
+  public int getTick() {
+    return this.tick;
   }
 
 }

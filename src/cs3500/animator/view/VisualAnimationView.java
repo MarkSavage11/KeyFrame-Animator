@@ -1,5 +1,8 @@
 package cs3500.animator.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 import cs3500.animator.model.ReadOnlyAnimationModel;
@@ -9,7 +12,7 @@ import cs3500.animator.model.ReadOnlyAnimationModel;
  */
 public class VisualAnimationView extends JFrame implements AnimationView{
 
-  private JPanel panel;
+  private AnimationPanel panel;
   private JScrollPane scrollPane;
 
   private final int speed; //Speed in ticks per second
@@ -32,7 +35,15 @@ public class VisualAnimationView extends JFrame implements AnimationView{
     this.setTitle("Excellent");
     this.setSize(500, 500);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    panel = new AnimationPanel(model, speed);
+    panel = new AnimationPanel(model);
+    Timer timer = new Timer(1000/speed, new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        panel.setTick(panel.getTick()+1);
+        panel.repaint();
+      }
+    });
+    timer.start();
     scrollPane = new JScrollPane(panel);
     this.add(scrollPane);
     this.setVisible(true);

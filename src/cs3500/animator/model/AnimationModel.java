@@ -37,4 +37,13 @@ public interface AnimationModel extends ReadOnlyAnimationModel {
   void insertKeyframe(String shapeName, int tick, State keyframe) throws IllegalArgumentException;
 
   void deleteKeyframe(String shapeName, int tick) throws IllegalArgumentException;
+
+  /**
+   * Deletes the shape with the given name from this model.
+   *
+   * @param shapeName name of the shape to be deleted
+   * @throws IllegalArgumentException if the given name is null or not found in this model.
+   */
+  void deleteShape(String shapeName) throws IllegalArgumentException;
+
 }

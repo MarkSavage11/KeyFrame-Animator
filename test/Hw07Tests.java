@@ -16,7 +16,7 @@ import cs3500.animator.model.StateImpl;
 
 public class Hw07Tests {
 
-  AnimationModel model;
+  private  AnimationModel model;
 
   @Before
   public void createModel() {
@@ -149,7 +149,7 @@ public class Hw07Tests {
   }
 
   @Test
-  public void testDeleteNoAnimations() {
+  public void testDeleteNoAnimations() { //delete should not complain when there are no animations
     model.deleteKeyframe("r2", 20);
   }
 }

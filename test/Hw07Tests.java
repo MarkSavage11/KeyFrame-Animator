@@ -2,7 +2,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.awt.*;
 import java.util.Collections;
@@ -76,10 +75,14 @@ public class Hw07Tests {
     assertEquals(model.getShape("c1").getKeyframes(), c1Frames);
   }
 
-  @Test(expected = IllegalStateException.class)
+  @Test
   public void testInsertIntoEmptyAnimations() {
+    SortedMap<Integer, State> r2Frames = new TreeMap<>();
+    r2Frames.put(10, new StateImpl(new Point(0, 0), new Dimension(10, 0), Color.RED));
+
     model.insertKeyframe("r2", 10,
-            new StateImpl(new Point(0, 0), new Dimension(0, 0), Color.RED));
+            new StateImpl(new Point(0, 0), new Dimension(10, 0), Color.RED));
+    assertEquals(model.getShape("r2").getKeyframes(), r2Frames);
   }
 
   @Test
@@ -140,15 +143,9 @@ public class Hw07Tests {
     model.deleteKeyframe("c1", 55);
     assertEquals(model.getShape("c1").getKeyframes(), c1Frames);
 
-    try {
-      model.deleteKeyframe("c1", 20);
-      fail();
-    } catch (IllegalStateException e) {}
-
-    try {
-      model.deleteKeyframe("c1", 6);
-      fail();
-    } catch (IllegalStateException e) {}
+    model.deleteKeyframe("c1", 20);
+    c1Frames.remove(20);
+    assertEquals(model.getShape("c1").getKeyframes(), c1Frames);
   }
 
   @Test

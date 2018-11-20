@@ -44,9 +44,8 @@ public class ShapeImpl implements Shape {
   @Override
   public void insertKeyframe(int tick, State frame) {
     if (animations.size() == 0) {
-      throw new IllegalStateException();
-    }
-    if (tick < animations.get(0).startTick()) {
+      animations.add(new BasicAnimation(tick, frame, tick, frame));
+    } else if (tick < animations.get(0).startTick()) {
       animations.add(0, new BasicAnimation(tick, frame, animations.get(0).startTick(),
               animations.get(0).startState()));
     } else if (tick > animations.get(animations.size() - 1).endTick()) {
@@ -68,14 +67,20 @@ public class ShapeImpl implements Shape {
     }
     if (tick == animations.get(0).startTick()) {
       if (animations.size() == 1) {
-        throw new IllegalStateException();
+        animations.set(0, new BasicAnimation(animations.get(0).endTick(),
+                animations.get(0).endState(), animations.get(0).endTick(),
+                animations.get(0).endState()));
+      } else {
+        animations.remove(0);
       }
-      animations.remove(0);
     } else if (tick == animations.get(animations.size() - 1).endTick()) {
       if (animations.size() == 1) {
-        throw new IllegalStateException();
+        animations.set(0, new BasicAnimation(animations.get(0).startTick(),
+                animations.get(0).startState(), animations.get(0).startTick(),
+                animations.get(0).startState()));
+      } else {
+        animations.remove(animations.size() - 1);
       }
-      animations.remove(animations.size() - 1);
     } else if (tick > animations.get(0).startTick() &&
             tick < animations.get(animations.size() - 1).endTick()) {
       replaceOverlap(tick, (overlap) -> Collections.singletonList(

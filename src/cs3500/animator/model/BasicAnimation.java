@@ -26,7 +26,7 @@ public class BasicAnimation implements Animation {
    */
   public BasicAnimation(int startTick, State startState,
                         int endTick, State endState) throws IllegalArgumentException{
-    if (endTick < 0 || startTick < 0 || endTick - startTick <= 0) {
+    if (endTick - startTick < 0) {
       throw new IllegalArgumentException("Illegal start or end ticks");
     }
     this.startTick = startTick;

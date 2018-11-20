@@ -11,8 +11,9 @@ public class AnimationControllerImpl implements IAnimationController {
   private AnimationView view;
 
 
-  public AnimationControllerImpl(AnimationModel model){
+  public AnimationControllerImpl(AnimationModel model, AnimationView view){
     this.model = model;
+    this.view = view;
   }
 
   @Override
@@ -27,16 +28,16 @@ public class AnimationControllerImpl implements IAnimationController {
 
   @Override
   public void addKeyframe(String shapeName, int tick, State state) {
-   //Needs public facing ability to add Keyframe
+   model.insertKeyframe(shapeName, tick, state);
   }
 
   @Override
   public void editKeyFrame(String shapeName, int tick, State state) {
-    //Needs public facing ability to add Keyframe
+    model.insertKeyframe(shapeName, tick, state);
   }
 
   @Override
   public void deleteKeyFrame(String shapeName, int tick) {
-
+    model.deleteKeyframe(shapeName, tick);
   }
 }

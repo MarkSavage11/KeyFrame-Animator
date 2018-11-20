@@ -351,5 +351,4 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     int tick = tickParse.nextInt();
     controller.deleteKeyFrame(shapeName, tick);
   }
-
 }

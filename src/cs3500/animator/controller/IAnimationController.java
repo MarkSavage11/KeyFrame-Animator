@@ -33,7 +33,4 @@ public interface IAnimationController {
   void editKeyFrame(String shapeName, int tick, State state);
 
   void deleteKeyFrame(String shapeName, int tick);
-
-
-
 }

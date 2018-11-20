@@ -383,4 +383,13 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     controller.deleteKeyFrame(shapeName, tick);
   }
 
+  /**
+   * Displays an error message in a separate dialogue box.
+   * .
+   * @param error the error message to display
+   */
+  public void showError(String error) {
+    JOptionPane.showMessageDialog(new JFrame(), error, "Error", JOptionPane.ERROR_MESSAGE);
+  }
+
 }

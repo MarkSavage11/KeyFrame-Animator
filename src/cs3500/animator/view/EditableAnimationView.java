@@ -10,8 +10,10 @@ import javax.swing.event.ListSelectionEvent;
 
 import cs3500.animator.controller.AnimationControllerImpl;
 import cs3500.animator.controller.IAnimationController;
+import cs3500.animator.model.Animation;
 import cs3500.animator.model.AnimationModel;
 import cs3500.animator.model.AnimationModelImpl;
+import cs3500.animator.model.BasicAnimation;
 import cs3500.animator.model.ReadOnlyAnimationModel;
 import cs3500.animator.model.ReadOnlyShape;
 import cs3500.animator.model.ShapeType;
@@ -22,7 +24,31 @@ import cs3500.animator.model.StateImpl;
 public class EditableAnimationView extends JFrame implements AnimationView {
 
   public static void main(String[] args){
-    AnimationModel model = new AnimationModelImpl(new Point(300,300), new Dimension(300,300));
+    AnimationModel model = new AnimationModelImpl(new Point(300,300), new Dimension(600,600));
+    model.addShape("R", ShapeType.RECTANGLE);
+    model.addShape("C", ShapeType.ELLIPSE);
+    Animation animR1 =
+            new BasicAnimation(1, new StateImpl(new Point(200, 200),
+                    new Dimension(50, 100), Color.RED), 10,
+                    new StateImpl(new Point(200, 200), new Dimension(50, 100), Color.RED));
+    Animation animR2 =
+            new BasicAnimation(10, new StateImpl(new Point(200, 200),
+                    new Dimension(50, 100), Color.RED), 50,
+                    new StateImpl(new Point(300, 300), new Dimension(50, 100), Color.RED));
+
+    Animation animC1 =
+            new BasicAnimation(6, new StateImpl(new Point(440, 70),
+                    new Dimension(120, 60), Color.BLUE),20,
+                    new StateImpl(new Point(440, 70), new Dimension(120, 60), Color.GREEN));
+    Animation animC2 =
+            new BasicAnimation(20, new StateImpl(new Point(440, 70),
+                    new Dimension(120, 60), Color.GREEN), 50,
+                    new StateImpl(new Point(440, 250), new Dimension(60, 0), Color.BLACK));
+    model.addAnimation("R", animR1);
+    model.addAnimation("R", animR2);
+    model.addAnimation("C", animC1);
+    model.addAnimation("C", animC2);
+
     IAnimationController controller = new AnimationControllerImpl(model);
    new EditableAnimationView(controller,20).display((ReadOnlyAnimationModel) model);
   }
@@ -85,12 +111,13 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     this.controller = controller;
     this.speed = speed;
     this.setTitle("Excellent");
-    this.setPreferredSize(new Dimension(1000, 600));
+    this.setPreferredSize(new Dimension(1150, 600));
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.timer = new Timer(1000/speed, (ActionEvent e) -> {
         displayPanel.setTick(displayPanel.getTick()+1);
         displayPanel.repaint();
       });
+    this.timer.start();
   }
 
   /**
@@ -105,12 +132,12 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     displayPanel.setPreferredSize(new Dimension(500,500));
     displayScrollPane = new JScrollPane(displayPanel);
 
-    JPanel editorPanel = new JPanel(new GridLayout(2, 2, 10, 10));
-    editorPanel.setPreferredSize(new Dimension(500,600));
+    JPanel editorPanel = new JPanel(new GridLayout(2, 2, 15, 10));
+    editorPanel.setPreferredSize(new Dimension(625,600));
 
     shapeDisplayPanel = new JPanel(new BorderLayout());
     shapeDisplayPanel.add(new JLabel("Shapes"), BorderLayout.PAGE_START);
-    shapeList = new JList<String>(this.getShapesInfoAsArray());
+    shapeList = new JList<>(this.getShapesInfoAsArray());
     shapeList.setLayoutOrientation(JList.VERTICAL);
     shapeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     shapeList.addListSelectionListener((ListSelectionEvent e) -> {
@@ -131,6 +158,9 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     keyFrameList = new JList<>(this.getKeyFrameInfoAsArray());
     keyFrameList.setLayoutOrientation(JList.VERTICAL);
     keyFrameList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    keyFrameList.addListSelectionListener((ListSelectionEvent e) -> {
+      this.deleteKeyFrameButton.setEnabled(true);
+    });
     keyFrameDisplayPanel.add(new JScrollPane(keyFrameList), BorderLayout.CENTER);
     deleteKeyFrameButton = new JButton("Delete");
     deleteKeyFrameButton.setEnabled(false);
@@ -141,8 +171,9 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     keyFrameDisplayPanel.add(deleteKeyFrameButton, BorderLayout.PAGE_END);
 
     addShapePanel = new JPanel();
+    addShapePanel.setPreferredSize(new Dimension(150, 300));
     JLabel nameLabel = new JLabel("Name");
-    addShapeNameBox = new JTextField(15);
+    addShapeNameBox = new JTextField(7);
 
     JLabel shapeLabel = new JLabel("Shape");
     addShapeTypeBox = new JComboBox<>(new String[]{"Rectangle", "Ellipse"});
@@ -162,49 +193,49 @@ public class EditableAnimationView extends JFrame implements AnimationView {
 
     keyFrameModifyPanel = new JPanel();
     editKeyFramePanel = new JPanel();
-    editKeyFramePanel.setPreferredSize(new Dimension(250,100));
+    editKeyFramePanel.setPreferredSize(new Dimension(190,100));
     addKeyFramePanel = new JPanel();
-    addKeyFramePanel.setPreferredSize(new Dimension(250,100));
-    editKeyFramePanel.add(new JLabel("x"));
+    addKeyFramePanel.setPreferredSize(new Dimension(240,100));
+    editKeyFramePanel.add(new JLabel("x "));
     editKeyFramePanel.add(editX);
-    editKeyFramePanel.add(new JLabel("y"));
+    editKeyFramePanel.add(new JLabel("y "));
     editKeyFramePanel.add(editY);
-    editKeyFramePanel.add(new JLabel("w"));
+    editKeyFramePanel.add(new JLabel("w "));
     editKeyFramePanel.add(editW);
-    editKeyFramePanel.add(new JLabel("h"));
+    editKeyFramePanel.add(new JLabel("h "));
     editKeyFramePanel.add(editH);
-    editKeyFramePanel.add(new JLabel("r"));
+    editKeyFramePanel.add(new JLabel("r "));
     editKeyFramePanel.add(editR);
-    editKeyFramePanel.add(new JLabel("g"));
+    editKeyFramePanel.add(new JLabel("g "));
     editKeyFramePanel.add(editG);
-    editKeyFramePanel.add(new JLabel("b"));
+    editKeyFramePanel.add(new JLabel("b "));
     editKeyFramePanel.add(editB);
     editKeyFrameButton = new JButton("Edit");
-    editKeyFrameButton.setPreferredSize(new Dimension(200, 30));
+    editKeyFrameButton.setPreferredSize(new Dimension(150, 30));
     editKeyFrameButton.addActionListener((ActionEvent e) -> {
       editKeyFrame();
       this.keyFrameList.setListData(getKeyFrameInfoAsArray());
     });
     editKeyFramePanel.add(editKeyFrameButton);
 
-    addKeyFramePanel.add(new JLabel("t"));
+    addKeyFramePanel.add(new JLabel("t "));
     addKeyFramePanel.add(addT);
-    addKeyFramePanel.add(new JLabel("x"));
+    addKeyFramePanel.add(new JLabel("x "));
     addKeyFramePanel.add(addX);
-    addKeyFramePanel.add(new JLabel("y"));
+    addKeyFramePanel.add(new JLabel("y "));
     addKeyFramePanel.add(addY);
-    addKeyFramePanel.add(new JLabel("w"));
+    addKeyFramePanel.add(new JLabel("w "));
     addKeyFramePanel.add(addW);
-    addKeyFramePanel.add(new JLabel("h"));
+    addKeyFramePanel.add(new JLabel("h "));
     addKeyFramePanel.add(addH);
-    addKeyFramePanel.add(new JLabel("r"));
+    addKeyFramePanel.add(new JLabel("r "));
     addKeyFramePanel.add(addR);
-    addKeyFramePanel.add(new JLabel("g"));
+    addKeyFramePanel.add(new JLabel("g "));
     addKeyFramePanel.add(addG);
-    addKeyFramePanel.add(new JLabel("b"));
+    addKeyFramePanel.add(new JLabel("b "));
     addKeyFramePanel.add(addB);
     addKeyFrameButton = new JButton("Add");
-    addKeyFrameButton.setPreferredSize(new Dimension(200, 30));
+    addKeyFrameButton.setPreferredSize(new Dimension(150, 30));
     addKeyFrameButton.addActionListener((ActionEvent e) -> {
       addKeyFrame();
       this.keyFrameList.setListData(getKeyFrameInfoAsArray());
@@ -290,7 +321,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
 
     int count = 0;
     for(Map.Entry<Integer, State> frame : shape.getKeyframes().entrySet()){
-      result[count] = String.format("t: &d x: %d y: %d w: %d h: %d Color: (%d, %d, %d)",
+      result[count] = String.format("t: %d x: %d y: %d w: %d h: %d Color: (%d, %d, %d)",
               frame.getKey(), frame.getValue().getPosition().x, frame.getValue().getPosition().y,
               frame.getValue().getSize().width, frame.getValue().getSize().height,
               frame.getValue().getColor().getRed(), frame.getValue().getColor().getGreen(),
@@ -351,4 +382,14 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     int tick = tickParse.nextInt();
     controller.deleteKeyFrame(shapeName, tick);
   }
+
+  /**
+   * Displays an error message in a separate dialogue box.
+   * .
+   * @param error the error message to display
+   */
+  public void showError(String error) {
+    JOptionPane.showMessageDialog(new JFrame(), error, "Error", JOptionPane.ERROR_MESSAGE);
+  }
+
 }

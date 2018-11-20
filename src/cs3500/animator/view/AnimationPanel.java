@@ -46,9 +46,9 @@ public class AnimationPanel extends JPanel {
       } catch(IllegalArgumentException e){
         state = null;
       }
-      g2d.setColor(state.getColor());
       //TODO make this a command pattern so that we can abstract it more. but for right now....
       if(state!= null) {
+        g2d.setColor(state.getColor());
         switch (shape.getType()) {
           case ELLIPSE:
             g2d.fillOval(state.getPosition().x, state.getPosition().y,

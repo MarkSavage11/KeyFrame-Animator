@@ -8,12 +8,7 @@ import java.util.Scanner;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 
-import cs3500.animator.controller.AnimationControllerImpl;
 import cs3500.animator.controller.IAnimationController;
-import cs3500.animator.model.Animation;
-import cs3500.animator.model.AnimationModel;
-import cs3500.animator.model.AnimationModelImpl;
-import cs3500.animator.model.BasicAnimation;
 import cs3500.animator.model.ReadOnlyAnimationModel;
 import cs3500.animator.model.ReadOnlyShape;
 import cs3500.animator.model.ShapeType;
@@ -86,7 +81,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     this.setPreferredSize(new Dimension(1150, 600));
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.timer = new Timer(1000/speed, (ActionEvent e) -> {
-        if(displayPanel.getTick() >= lastTick){
+        if(isLooping && displayPanel.getTick() >= lastTick){
           displayPanel.setTick(firstTick);
         }else {
           displayPanel.setTick(displayPanel.getTick() + 1);
@@ -97,7 +92,8 @@ public class EditableAnimationView extends JFrame implements AnimationView {
   }
 
   /**
-   * Displays the given model's animation in a fully animated view.
+   * Displays the given model's animation, while also allowing for interaction and editing of the
+   * model.
    *
    * @param model the animation model to display.
    * @throws IllegalStateException this method does not throw this exception.
@@ -120,6 +116,9 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     shapeList.addListSelectionListener((ListSelectionEvent e) -> {
       keyFrameList.setListData(getKeyFrameInfoAsArray());
       deleteShapeButton.setEnabled(true);
+      deleteKeyFrameButton.setEnabled(false);
+      editKeyFrameButton.setEnabled(false);
+      addKeyFrameButton.setEnabled(true);
     });
     shapeDisplayPanel.add(new JScrollPane(shapeList), BorderLayout.CENTER);
     deleteShapeButton = new JButton("Delete");
@@ -128,6 +127,9 @@ public class EditableAnimationView extends JFrame implements AnimationView {
       deleteShape();
       this.shapeList.setListData(getShapesInfoAsArray());
       resetTickBounds();
+      this.deleteKeyFrameButton.setEnabled(false);
+      this.editKeyFrameButton.setEnabled(false);
+      this.addKeyFrameButton.setEnabled(false);
     });
     shapeDisplayPanel.add(deleteShapeButton, BorderLayout.PAGE_END);
 
@@ -138,6 +140,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     keyFrameList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     keyFrameList.addListSelectionListener((ListSelectionEvent e) -> {
       this.deleteKeyFrameButton.setEnabled(true);
+      this.editKeyFrameButton.setEnabled(true);
     });
     keyFrameDisplayPanel.add(new JScrollPane(keyFrameList), BorderLayout.CENTER);
     deleteKeyFrameButton = new JButton("Delete");
@@ -146,6 +149,8 @@ public class EditableAnimationView extends JFrame implements AnimationView {
       deleteKeyFrame();
       this.keyFrameList.setListData(getKeyFrameInfoAsArray());
       resetTickBounds();
+      this.deleteKeyFrameButton.setEnabled(false);
+      this.editKeyFrameButton.setEnabled(false);
     });
     keyFrameDisplayPanel.add(deleteKeyFrameButton, BorderLayout.PAGE_END);
 
@@ -196,7 +201,10 @@ public class EditableAnimationView extends JFrame implements AnimationView {
       editKeyFrame();
       this.keyFrameList.setListData(getKeyFrameInfoAsArray());
       resetTickBounds();
+      this.editKeyFrameButton.setEnabled(false);
+      this.deleteKeyFrameButton.setEnabled(false);
     });
+    editKeyFrameButton.setEnabled(false);
     editKeyFramePanel.add(editKeyFrameButton);
 
     addKeyFramePanel.add(new JLabel("t "));
@@ -222,6 +230,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
       this.keyFrameList.setListData(getKeyFrameInfoAsArray());
       resetTickBounds();
     });
+    addKeyFrameButton.setEnabled(false);
     addKeyFramePanel.add(addKeyFrameButton);
 
 
@@ -254,8 +263,12 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     this.speedTextField = new JTextField("" + this.speed, 2);
     this.changeSpeedButton = new JButton("Change");
     changeSpeedButton.addActionListener((ActionEvent e) -> {
-      this.speed = Integer.parseInt(speedTextField.getText());
-      timer.setDelay(1000 / speed);
+      try {
+        this.speed = Integer.parseInt(speedTextField.getText());
+        timer.setDelay(1000 / speed);
+      }catch(Exception error){
+        this.showError(error.getMessage());
+      }
     });
     this.isLoopingBox = new JCheckBox("Looping", false);
     isLoopingBox.addActionListener((ActionEvent e) -> {
@@ -338,11 +351,15 @@ public class EditableAnimationView extends JFrame implements AnimationView {
 
   private void addKeyFrame() {
     Scanner nameParse = new Scanner(shapeList.getSelectedValue());
-    controller.addKeyframe(nameParse.next(), Integer.parseInt(addT.getText()), new StateImpl(
-            new Point(Integer.parseInt(addX.getText()), Integer.parseInt(addY.getText())),
-            new Dimension(Integer.parseInt(addW.getText()), Integer.parseInt(addH.getText())),
-            new Color(Integer.parseInt(addR.getText()),Integer.parseInt(addG.getText()),
-            Integer.parseInt(addB.getText()))));
+    try {
+      controller.addKeyframe(nameParse.next(), Integer.parseInt(addT.getText()), new StateImpl(
+              new Point(Integer.parseInt(addX.getText()), Integer.parseInt(addY.getText())),
+              new Dimension(Integer.parseInt(addW.getText()), Integer.parseInt(addH.getText())),
+              new Color(Integer.parseInt(addR.getText()), Integer.parseInt(addG.getText()),
+                      Integer.parseInt(addB.getText()))));
+    }catch(Exception e){
+      this.showError(e.getMessage());
+    }
 
   }
 
@@ -350,11 +367,15 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     Scanner nameParse = new Scanner(shapeList.getSelectedValue());
     Scanner tickParse = new Scanner(keyFrameList.getSelectedValue());
     tickParse.next();
-    controller.addKeyframe(nameParse.next(), tickParse.nextInt(), new StateImpl(
-            new Point(Integer.parseInt(editX.getText()), Integer.parseInt(editY.getText())),
-            new Dimension(Integer.parseInt(editW.getText()), Integer.parseInt(editH.getText())),
-            new Color(Integer.parseInt(editR.getText()),Integer.parseInt(editG.getText()),
-                    Integer.parseInt(editB.getText()))));
+    try {
+      controller.editKeyFrame(nameParse.next(), tickParse.nextInt(), new StateImpl(
+              new Point(Integer.parseInt(editX.getText()), Integer.parseInt(editY.getText())),
+              new Dimension(Integer.parseInt(editW.getText()), Integer.parseInt(editH.getText())),
+              new Color(Integer.parseInt(editR.getText()), Integer.parseInt(editG.getText()),
+                      Integer.parseInt(editB.getText()))));
+    } catch(Exception e){
+      this.showError(e.getMessage());
+    }
   }
 
   private void deleteKeyFrame() {
@@ -366,8 +387,12 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     controller.deleteKeyFrame(shapeName, tick);
   }
 
-  public void resetTickBounds(){
+  private void resetTickBounds(){
     this.firstTick = model.getFirstTick();
     this.lastTick = model.getLastTick();
+  }
+
+  private void showError(String error) {
+    JOptionPane.showMessageDialog(new JFrame(), error, "Error", JOptionPane.ERROR_MESSAGE);
   }
 }

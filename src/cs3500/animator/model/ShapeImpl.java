@@ -64,6 +64,9 @@ public class ShapeImpl implements Shape {
   public void deleteKeyframe(int tick) {
     if (animations.size() == 0) {
       return;
+    } else if (animations.size() == 1 &&
+            animations.get(0).startTick() == animations.get(0).endTick()) {
+      animations.remove(0);
     }
     if (tick == animations.get(0).startTick()) {
       if (animations.size() == 1) {

@@ -23,36 +23,6 @@ import cs3500.animator.model.StateImpl;
 
 public class EditableAnimationView extends JFrame implements AnimationView {
 
-  public static void main(String[] args){
-    AnimationModel model = new AnimationModelImpl(new Point(300,300), new Dimension(600,600));
-    model.addShape("R", ShapeType.RECTANGLE);
-    model.addShape("C", ShapeType.ELLIPSE);
-    Animation animR1 =
-            new BasicAnimation(1, new StateImpl(new Point(200, 200),
-                    new Dimension(50, 100), Color.RED), 10,
-                    new StateImpl(new Point(200, 200), new Dimension(50, 100), Color.RED));
-    Animation animR2 =
-            new BasicAnimation(10, new StateImpl(new Point(200, 200),
-                    new Dimension(50, 100), Color.RED), 50,
-                    new StateImpl(new Point(300, 300), new Dimension(50, 100), Color.RED));
-
-    Animation animC1 =
-            new BasicAnimation(6, new StateImpl(new Point(440, 70),
-                    new Dimension(120, 60), Color.BLUE),20,
-                    new StateImpl(new Point(440, 70), new Dimension(120, 60), Color.GREEN));
-    Animation animC2 =
-            new BasicAnimation(20, new StateImpl(new Point(440, 70),
-                    new Dimension(120, 60), Color.GREEN), 50,
-                    new StateImpl(new Point(440, 250), new Dimension(60, 0), Color.BLACK));
-    model.addAnimation("R", animR1);
-    model.addAnimation("R", animR2);
-    model.addAnimation("C", animC1);
-    model.addAnimation("C", animC2);
-
-    IAnimationController controller = new AnimationControllerImpl(model);
-   new EditableAnimationView(controller,20).display(model);
-  }
-
   private JPanel shapeDisplayPanel;
   private JList<String> shapeList;
   private JButton deleteShapeButton;

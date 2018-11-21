@@ -78,6 +78,7 @@ public final class Excellence {
           break;
         case "edit":
           view = new EditableAnimationView(controller, speed);
+          break;
         default:
           showError("Unknown view type");
       }

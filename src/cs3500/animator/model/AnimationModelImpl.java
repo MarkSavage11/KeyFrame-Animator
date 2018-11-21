@@ -19,6 +19,8 @@ public class AnimationModelImpl implements AnimationModel {
   private Map<String, Shape> shapes;
   private Point canvasPosition;
   private Dimension canvasSize;
+  private int lastTick;
+  private int firstTick;
 
   /**
    * Constructs an empty animation model with the given canvas dimensions and position.
@@ -54,6 +56,11 @@ public class AnimationModelImpl implements AnimationModel {
     }
 
     shapes.get(shapeName).addAnimation(anim);
+    if (anim.endTick() > lastTick) {
+      lastTick= anim.endTick();
+    } else if (anim.startTick() < firstTick) {
+      firstTick = anim.startTick();
+    }
   }
 
   @Override
@@ -90,6 +97,11 @@ public class AnimationModelImpl implements AnimationModel {
   @Override
   public void insertKeyframe(String shapeName, int tick, State keyframe) throws IllegalArgumentException {
     shapes.get(shapeName).insertKeyframe(tick, keyframe);
+    if (tick > lastTick) {
+      lastTick= tick;
+    } else if (tick < firstTick) {
+      firstTick = tick;
+    }
   }
 
   @Override
@@ -103,6 +115,16 @@ public class AnimationModelImpl implements AnimationModel {
     if(shapes.containsKey(shapeName)) {
       shapes.remove(shapeName);
     }
+  }
+
+  @Override
+  public int getFirstTick() {
+    return firstTick;
+  }
+
+  @Override
+  public int getLastTick() {
+    return lastTick;
   }
 
   /**

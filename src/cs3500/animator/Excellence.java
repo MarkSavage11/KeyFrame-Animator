@@ -9,10 +9,13 @@ import java.util.Map;
 
 import javax.swing.*;
 
+import cs3500.animator.controller.AnimationControllerImpl;
+import cs3500.animator.controller.IAnimationController;
 import cs3500.animator.model.AnimationModel;
 import cs3500.animator.model.AnimationModelImpl;
 import cs3500.animator.util.AnimationReader;
 import cs3500.animator.view.AnimationView;
+import cs3500.animator.view.EditableAnimationView;
 import cs3500.animator.view.SVGAnimationView;
 import cs3500.animator.view.TextAnimationView;
 import cs3500.animator.view.VisualAnimationView;
@@ -60,6 +63,8 @@ public final class Excellence {
     }
 
     AnimationView view = null;
+    IAnimationController controller = new AnimationControllerImpl(model);
+
     if (flags.containsKey("-view")) {
       switch (flags.get("-view")) {
         case "text":
@@ -71,6 +76,8 @@ public final class Excellence {
         case "svg":
           view = new SVGAnimationView(out, speed);
           break;
+        case "edit":
+          view = new EditableAnimationView(controller, speed);
         default:
           showError("Unknown view type");
       }
@@ -80,7 +87,7 @@ public final class Excellence {
 
     try {
       if (view != null && model != null) {
-        view.display(model);
+        controller.run(view);
         if (out instanceof FileWriter) {
           try {
             ((FileWriter) out).close();

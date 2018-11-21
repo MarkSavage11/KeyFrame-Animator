@@ -1,7 +1,9 @@
 package cs3500.animator.controller;
 
+import cs3500.animator.model.AnimationModel;
 import cs3500.animator.model.ShapeType;
 import cs3500.animator.model.State;
+import cs3500.animator.view.AnimationView;
 
 public interface IAnimationController {
 
@@ -33,4 +35,6 @@ public interface IAnimationController {
   void editKeyFrame(String shapeName, int tick, State state);
 
   void deleteKeyFrame(String shapeName, int tick);
+
+  void run(AnimationView view);
 }

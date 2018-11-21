@@ -31,4 +31,8 @@ public interface ReadOnlyAnimationModel {
    * @return the size of the canvas.
    */
   Dimension canvasSize();
+
+  int getFirstTick();
+
+  int getLastTick();
 }

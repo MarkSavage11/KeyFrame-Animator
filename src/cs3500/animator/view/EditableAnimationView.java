@@ -50,7 +50,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     model.addAnimation("C", animC2);
 
     IAnimationController controller = new AnimationControllerImpl(model);
-   new EditableAnimationView(controller,20).display((ReadOnlyAnimationModel) model);
+   new EditableAnimationView(controller,20).display(model);
   }
 
   private JPanel shapeDisplayPanel;

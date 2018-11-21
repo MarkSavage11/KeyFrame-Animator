@@ -15,7 +15,18 @@ interface Shape extends ReadOnlyShape {
    */
   void addAnimation(Animation anim) throws IllegalArgumentException;
 
+  /**
+   * Inserts a keyframe into the set of animations in this shape.
+   *
+   * @param tick  the tick the keyframe occurs
+   * @param frame the state of teh shape at that tick
+   */
   void insertKeyframe(int tick, State frame);
 
+  /**
+   * Deletes a keyframe from this shape.
+   *
+   * @param tick the tick of the keyframe to delete
+   */
   void deleteKeyframe(int tick);
 }

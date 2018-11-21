@@ -23,7 +23,7 @@ public class AnimationPanel extends JPanel {
    *
    * @param model the model to animate
    */
-  public AnimationPanel(ReadOnlyAnimationModel model){
+  public AnimationPanel(ReadOnlyAnimationModel model) {
     this.model = model;
   }
 
@@ -38,16 +38,16 @@ public class AnimationPanel extends JPanel {
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g.create();
 
-    for(Map.Entry<String, ReadOnlyShape> shapeEntry : model.getShapes().entrySet()){
+    for (Map.Entry<String, ReadOnlyShape> shapeEntry : model.getShapes().entrySet()) {
       ReadOnlyShape shape = shapeEntry.getValue();
       State state;
       try {
         state = shape.getStateAt(tick);
-      } catch(IllegalArgumentException e){
+      } catch (IllegalArgumentException e) {
         state = null;
       }
       //TODO make this a command pattern so that we can abstract it more. but for right now....
-      if(state!= null) {
+      if (state != null) {
         g2d.setColor(state.getColor());
         switch (shape.getType()) {
           case ELLIPSE:
@@ -66,7 +66,7 @@ public class AnimationPanel extends JPanel {
 
   }
 
-  public void setTick(int tick){
+  public void setTick(int tick) {
     this.tick = tick;
   }
 

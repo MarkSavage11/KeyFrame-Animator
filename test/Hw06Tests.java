@@ -21,7 +21,7 @@ public class Hw06Tests {
 
   @Before
   public void init() {
-    this.model = new AnimationModelImpl(new Point(200, 200), new Dimension(600,600));
+    this.model = new AnimationModelImpl(new Point(200, 200), new Dimension(600, 600));
     model.addShape("R", ShapeType.RECTANGLE);
     model.addShape("C", ShapeType.ELLIPSE);
     Animation animR1 =
@@ -35,7 +35,7 @@ public class Hw06Tests {
 
     Animation animC1 =
             new BasicAnimation(6, new StateImpl(new Point(440, 70),
-                    new Dimension(120, 60), Color.BLUE),20,
+                    new Dimension(120, 60), Color.BLUE), 20,
                     new StateImpl(new Point(440, 70), new Dimension(120, 60), Color.GREEN));
     Animation animC2 =
             new BasicAnimation(20, new StateImpl(new Point(440, 70),
@@ -48,7 +48,7 @@ public class Hw06Tests {
   }
 
   @Test
-  public void testTextView(){
+  public void testTextView() {
     Appendable ap = new StringBuilder();
     AnimationView view = new TextAnimationView(ap);
     view.display(model);
@@ -63,7 +63,7 @@ public class Hw06Tests {
   }
 
   @Test
-  public void testSVGView(){
+  public void testSVGView() {
     Appendable ap = new StringBuilder();
     AnimationView view = new SVGAnimationView(ap, 1);
     view.display(model);

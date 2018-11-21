@@ -16,7 +16,7 @@ import cs3500.animator.model.StateImpl;
 
 public class Hw07Tests {
 
-  private  AnimationModel model;
+  private AnimationModel model;
 
   @Before
   public void createModel() {

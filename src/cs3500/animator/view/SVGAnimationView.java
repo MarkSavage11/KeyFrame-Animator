@@ -37,8 +37,8 @@ public class SVGAnimationView implements AnimationView {
   public void display(ReadOnlyAnimationModel model) throws IllegalStateException {
     try {
       ap.append(String.format("<svg viewbox=\"%d %d %d %d\" version=\"1.1\" xmlns=\"" +
-              "http://www.w3.org/2000/svg\">\n", model.canvasPosition().x, model.canvasPosition().y,
-              model.canvasSize().width, model.canvasSize().height));
+                      "http://www.w3.org/2000/svg\">\n", model.canvasPosition().x,
+              model.canvasPosition().y, model.canvasSize().width, model.canvasSize().height));
 
       for (Map.Entry<String, ReadOnlyShape> shape : model.getShapes().entrySet()) {
         String shapeTag;

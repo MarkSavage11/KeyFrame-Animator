@@ -10,7 +10,7 @@ import cs3500.animator.model.ReadOnlyShape;
 /**
  * An animation view that displays a textual representation of the given animation model.
  */
-public class TextAnimationView implements AnimationView{
+public class TextAnimationView implements AnimationView {
 
   private Appendable output;
 

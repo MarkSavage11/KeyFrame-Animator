@@ -24,9 +24,9 @@ public final class Excellence {
   public static void main(String[] args) {
     Map<String, String> flags = new HashMap<>();
 
-    for (int i = 0; i < args.length; i+= 2) {
+    for (int i = 0; i < args.length; i += 2) {
       if (i + 1 < args.length) {
-        flags.put(args[i], args[i+1]);
+        flags.put(args[i], args[i + 1]);
       } else {
         showError("malformed argument list");
       }

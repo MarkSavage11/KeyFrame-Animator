@@ -26,7 +26,7 @@ public class AnimationModelImpl implements AnimationModel {
    * Constructs an empty animation model with the given canvas dimensions and position.
    *
    * @param canvasPosition the position where a canvas representing this model would appear
-   * @param canvasSize this size a canvas representing this model would appear with
+   * @param canvasSize     this size a canvas representing this model would appear with
    */
   public AnimationModelImpl(Point canvasPosition, Dimension canvasSize) {
     this.canvasPosition = canvasPosition;
@@ -57,7 +57,7 @@ public class AnimationModelImpl implements AnimationModel {
 
     shapes.get(shapeName).addAnimation(anim);
     if (anim.endTick() > lastTick) {
-      lastTick= anim.endTick();
+      lastTick = anim.endTick();
     } else if (anim.startTick() < firstTick) {
       firstTick = anim.startTick();
     }
@@ -98,7 +98,7 @@ public class AnimationModelImpl implements AnimationModel {
   public void insertKeyframe(String shapeName, int tick, State keyframe) throws IllegalArgumentException {
     shapes.get(shapeName).insertKeyframe(tick, keyframe);
     if (tick > lastTick) {
-      lastTick= tick;
+      lastTick = tick;
     } else if (tick < firstTick) {
       firstTick = tick;
     }
@@ -112,7 +112,7 @@ public class AnimationModelImpl implements AnimationModel {
   @Override
   public void deleteShape(String shapeName) throws IllegalArgumentException {
     Objects.requireNonNull(shapeName);
-    if(shapes.containsKey(shapeName)) {
+    if (shapes.containsKey(shapeName)) {
       shapes.remove(shapeName);
     }
   }

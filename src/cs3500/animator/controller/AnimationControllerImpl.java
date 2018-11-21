@@ -17,27 +17,27 @@ public class AnimationControllerImpl implements IAnimationController {
 
   @Override
   public void deleteShape(String name) {
-    runOrError(()->model.deleteShape(name));
+    runOrError(() -> model.deleteShape(name));
   }
 
   @Override
   public void addShape(String name, ShapeType type) {
-    runOrError(()->model.addShape(name, type));
+    runOrError(() -> model.addShape(name, type));
   }
 
   @Override
   public void addKeyframe(String shapeName, int tick, State state) {
-   runOrError(()->model.insertKeyframe(shapeName, tick, state));
+    runOrError(() -> model.insertKeyframe(shapeName, tick, state));
   }
 
   @Override
   public void editKeyFrame(String shapeName, int tick, State state) {
-    runOrError(()->model.insertKeyframe(shapeName, tick, state));
+    runOrError(() -> model.insertKeyframe(shapeName, tick, state));
   }
 
   @Override
   public void deleteKeyFrame(String shapeName, int tick) {
-    runOrError(()->model.deleteKeyframe(shapeName, tick));
+    runOrError(() -> model.deleteKeyframe(shapeName, tick));
   }
 
   @Override

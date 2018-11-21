@@ -36,7 +36,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
   private JTextField editW = new JTextField(2);
   private JTextField editH = new JTextField(2);
   private JTextField editR = new JTextField(2);
-  private JTextField editG= new JTextField(2);
+  private JTextField editG = new JTextField(2);
   private JTextField editB = new JTextField(2);
   private JButton editKeyFrameButton;
   private JPanel addKeyFramePanel;
@@ -73,21 +73,21 @@ public class EditableAnimationView extends JFrame implements AnimationView {
   /**
    * Constructs a visual animation view that shows an animation of the given model.
    */
-  public EditableAnimationView(IAnimationController controller, int speed){
+  public EditableAnimationView(IAnimationController controller, int speed) {
     super();
     this.controller = controller;
     this.speed = speed;
     this.setTitle("Excellent");
     this.setPreferredSize(new Dimension(1150, 600));
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.timer = new Timer(1000/speed, (ActionEvent e) -> {
-        if(isLooping && displayPanel.getTick() >= lastTick){
-          displayPanel.setTick(firstTick);
-        }else {
-          displayPanel.setTick(displayPanel.getTick() + 1);
-        }
-        displayPanel.repaint();
-      });
+    this.timer = new Timer(1000 / speed, (ActionEvent e) -> {
+      if (isLooping && displayPanel.getTick() >= lastTick) {
+        displayPanel.setTick(firstTick);
+      } else {
+        displayPanel.setTick(displayPanel.getTick() + 1);
+      }
+      displayPanel.repaint();
+    });
     this.timer.start();
   }
 
@@ -98,15 +98,15 @@ public class EditableAnimationView extends JFrame implements AnimationView {
    * @param model the animation model to display.
    * @throws IllegalStateException this method does not throw this exception.
    */
-  public void display(ReadOnlyAnimationModel model) throws IllegalStateException{
+  public void display(ReadOnlyAnimationModel model) throws IllegalStateException {
     this.model = model;
     resetTickBounds();
     displayPanel = new AnimationPanel(model);
-    displayPanel.setPreferredSize(new Dimension(500,500));
+    displayPanel.setPreferredSize(new Dimension(500, 500));
     displayScrollPane = new JScrollPane(displayPanel);
 
     JPanel editorPanel = new JPanel(new GridLayout(2, 2, 15, 10));
-    editorPanel.setPreferredSize(new Dimension(625,600));
+    editorPanel.setPreferredSize(new Dimension(625, 600));
 
     shapeDisplayPanel = new JPanel(new BorderLayout());
     shapeDisplayPanel.add(new JLabel("Shapes"), BorderLayout.PAGE_START);
@@ -178,9 +178,9 @@ public class EditableAnimationView extends JFrame implements AnimationView {
 
     keyFrameModifyPanel = new JPanel();
     editKeyFramePanel = new JPanel();
-    editKeyFramePanel.setPreferredSize(new Dimension(190,100));
+    editKeyFramePanel.setPreferredSize(new Dimension(190, 100));
     addKeyFramePanel = new JPanel();
-    addKeyFramePanel.setPreferredSize(new Dimension(240,100));
+    addKeyFramePanel.setPreferredSize(new Dimension(240, 100));
     editKeyFramePanel.add(new JLabel("x "));
     editKeyFramePanel.add(editX);
     editKeyFramePanel.add(new JLabel("y "));
@@ -246,7 +246,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     viewerPanel.setPreferredSize(new Dimension(500, 600));
 
     playerPanel = new JPanel();
-    playerPanel.setPreferredSize(new Dimension(500,100));
+    playerPanel.setPreferredSize(new Dimension(500, 100));
     this.restartButton = new JButton("Restart");
     restartButton.addActionListener((ActionEvent e) -> {
       displayPanel.setTick(1);
@@ -266,7 +266,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
       try {
         this.speed = Integer.parseInt(speedTextField.getText());
         timer.setDelay(1000 / speed);
-      }catch(Exception error){
+      } catch (Exception error) {
         this.showError(error.getMessage());
       }
     });
@@ -299,7 +299,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
   private String[] getShapesInfoAsArray() {
     String[] result = new String[model.getShapes().size()];
     int count = 0;
-    for(Map.Entry<String, ReadOnlyShape> shape : model.getShapes().entrySet()){
+    for (Map.Entry<String, ReadOnlyShape> shape : model.getShapes().entrySet()) {
       result[count] = String.format("%s  |  %s",
               shape.getKey(), shape.getValue().getType().toString());
       count++;
@@ -308,7 +308,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
   }
 
   private String[] getKeyFrameInfoAsArray() {
-    if(shapeList.getSelectedValue() == null){
+    if (shapeList.getSelectedValue() == null) {
       return new String[0];
     }
     Scanner nameParse = new Scanner(shapeList.getSelectedValue());
@@ -316,7 +316,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     String[] result = new String[shape.getKeyframes().size()];
 
     int count = 0;
-    for(Map.Entry<Integer, State> frame : shape.getKeyframes().entrySet()){
+    for (Map.Entry<Integer, State> frame : shape.getKeyframes().entrySet()) {
       result[count] = String.format("t: %d x: %d y: %d w: %d h: %d Color: (%d, %d, %d)",
               frame.getKey(), frame.getValue().getPosition().x, frame.getValue().getPosition().y,
               frame.getValue().getSize().width, frame.getValue().getSize().height,
@@ -328,9 +328,9 @@ public class EditableAnimationView extends JFrame implements AnimationView {
   }
 
 
-  private void addShape(){
+  private void addShape() {
     ShapeType type = null;
-    switch((String) addShapeTypeBox.getSelectedItem()){
+    switch ((String) addShapeTypeBox.getSelectedItem()) {
       case "Ellipse":
         type = ShapeType.ELLIPSE;
         break;
@@ -343,7 +343,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     this.controller.addShape(addShapeNameBox.getText(), type);
   }
 
-  private void deleteShape(){
+  private void deleteShape() {
     Scanner nameParse = new Scanner(shapeList.getSelectedValue());
     this.controller.deleteShape(nameParse.next());
 
@@ -357,7 +357,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
               new Dimension(Integer.parseInt(addW.getText()), Integer.parseInt(addH.getText())),
               new Color(Integer.parseInt(addR.getText()), Integer.parseInt(addG.getText()),
                       Integer.parseInt(addB.getText()))));
-    }catch(Exception e){
+    } catch (Exception e) {
       this.showError(e.getMessage());
     }
 
@@ -373,7 +373,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
               new Dimension(Integer.parseInt(editW.getText()), Integer.parseInt(editH.getText())),
               new Color(Integer.parseInt(editR.getText()), Integer.parseInt(editG.getText()),
                       Integer.parseInt(editB.getText()))));
-    } catch(Exception e){
+    } catch (Exception e) {
       this.showError(e.getMessage());
     }
   }
@@ -387,7 +387,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     controller.deleteKeyFrame(shapeName, tick);
   }
 
-  private void resetTickBounds(){
+  private void resetTickBounds() {
     this.firstTick = model.getFirstTick();
     this.lastTick = model.getLastTick();
   }

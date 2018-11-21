@@ -4,8 +4,8 @@ import java.awt.*;
 import java.util.Map;
 
 /**
- * A read only model which stores shapes and animations to be used in a view. It holds a map of
- * read only shapes and their names, as well as any information relating to the canvas.
+ * A read only model which stores shapes and animations to be used in a view. It holds a map of read
+ * only shapes and their names, as well as any information relating to the canvas.
  */
 public interface ReadOnlyAnimationModel {
 
@@ -32,7 +32,17 @@ public interface ReadOnlyAnimationModel {
    */
   Dimension canvasSize();
 
+  /**
+   * Gets the earliest tick that any animation in this model starts.
+   *
+   * @return the earliest tick among all shapes in this model
+   */
   int getFirstTick();
 
+  /**
+   * Gets the latest tick that any animation in this model ends.
+   *
+   * @return the latest tick among all shapes in this model
+   */
   int getLastTick();
 }

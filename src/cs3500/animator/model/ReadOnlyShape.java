@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.SortedMap;
 
 /**
- * A read only shape. Maintains a list of its animations, its type, and can return its state given
- * a tick.
+ * A read only shape. Maintains a list of its animations, its type, and can return its state given a
+ * tick.
  */
 public interface ReadOnlyShape {
   /**
@@ -22,6 +22,11 @@ public interface ReadOnlyShape {
    */
   List<Animation> getAnimations();
 
+  /**
+   * Gets a list of animations in this shape expressed as keyframes.
+   *
+   * @return a list of keyframes in this shape.
+   */
   SortedMap<Integer, State> getKeyframes();
 
   /**

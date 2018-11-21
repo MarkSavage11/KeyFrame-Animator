@@ -26,15 +26,32 @@ public interface IAnimationController {
    * Adds a keyframe with a given tick and state to the given shape.
    *
    * @param shapeName the name of the shape the keyframe is being added to
-   * @param tick the tick of the keyframe
-   * @param state the state of the keyframe
+   * @param tick      the tick of the keyframe
+   * @param state     the state of the keyframe
    */
   void addKeyframe(String shapeName, int tick, State state);
 
-  //May be redundant.
+  /**
+   * Edits the keyframe of the given shape at the given tick to have the given state
+   *
+   * @param shapeName the name of the shape the keyframe belongs to
+   * @param tick      the tick at which the keyframe occurs
+   * @param state     the state of the keyframe
+   */
   void editKeyFrame(String shapeName, int tick, State state);
 
+  /**
+   * Deletes the keyframe of the given shape at the given tick
+   *
+   * @param shapeName the name of the shape that the keyframe belongs to
+   * @param tick      the tick the keyframe occurs
+   */
   void deleteKeyFrame(String shapeName, int tick);
 
+  /**
+   * Runs the controller, displaying to the given view.
+   *
+   * @param view the view to use to display
+   */
   void run(AnimationView view);
 }

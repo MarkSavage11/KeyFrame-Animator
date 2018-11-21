@@ -16,8 +16,8 @@ public class StateImpl implements State {
    * Constructs a state with a given position, size, and color.
    *
    * @param position the position in this state
-   * @param size the size in this state
-   * @param color the color in this state
+   * @param size     the size in this state
+   * @param color    the color in this state
    */
   public StateImpl(Point position, Dimension size, Color color) {
     this.position = position;

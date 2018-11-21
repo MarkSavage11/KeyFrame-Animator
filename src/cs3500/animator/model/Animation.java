@@ -1,8 +1,8 @@
 package cs3500.animator.model;
 
 /**
- * An animation, which has a start and end time and state.
- * It will be attached to a shape to define its behavior over a specific duration.
+ * An animation, which has a start and end time and state. It will be attached to a shape to define
+ * its behavior over a specific duration.
  */
 public interface Animation {
   /**

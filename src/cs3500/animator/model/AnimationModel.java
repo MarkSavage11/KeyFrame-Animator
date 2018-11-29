@@ -1,6 +1,8 @@
 package cs3500.animator.model;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.Dimension;
 
 /**
  * A model which handles shapes and animations. Can have shapes added to the set of animations it

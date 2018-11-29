@@ -1,11 +1,27 @@
 package cs3500.animator.view;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.util.Map;
 import java.util.Scanner;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.Timer;
+import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
 
 import cs3500.animator.controller.IAnimationController;
@@ -18,19 +34,13 @@ import cs3500.animator.model.StateImpl;
 
 public class EditableAnimationView extends JFrame implements AnimationView {
 
-  private JPanel shapeDisplayPanel;
   private JList<String> shapeList;
   private JButton deleteShapeButton;
-  private JPanel addShapePanel;
   private JTextField addShapeNameBox;
   private JComboBox<String> addShapeTypeBox;
-  private JButton addShapeButton;
 
-  private JPanel keyFrameDisplayPanel;
   private JList<String> keyFrameList;
   private JButton deleteKeyFrameButton;
-  private JPanel keyFrameModifyPanel;
-  private JPanel editKeyFramePanel;
   private JTextField editX = new JTextField(2);
   private JTextField editY = new JTextField(2);
   private JTextField editW = new JTextField(2);
@@ -39,7 +49,6 @@ public class EditableAnimationView extends JFrame implements AnimationView {
   private JTextField editG = new JTextField(2);
   private JTextField editB = new JTextField(2);
   private JButton editKeyFrameButton;
-  private JPanel addKeyFramePanel;
   private JTextField addT = new JTextField(2);
   private JTextField addX = new JTextField(2);
   private JTextField addY = new JTextField(2);
@@ -50,16 +59,8 @@ public class EditableAnimationView extends JFrame implements AnimationView {
   private JTextField addB = new JTextField(2);
   private JButton addKeyFrameButton;
 
-  private JPanel viewerPanel;
   private AnimationPanel displayPanel;
-  private JScrollPane displayScrollPane;
-  private JPanel playerPanel;
-  private JButton restartButton;
-  private JButton playButton;
-  private JButton pauseButton;
   private JTextField speedTextField;
-  private JButton changeSpeedButton;
-  private JCheckBox isLoopingBox;
 
   private ReadOnlyAnimationModel model;
   private final IAnimationController controller;
@@ -79,7 +80,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     this.speed = speed;
     this.setTitle("Excellent");
     this.setPreferredSize(new Dimension(1150, 600));
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     this.timer = new Timer(1000 / speed, (ActionEvent e) -> {
       if (isLooping && displayPanel.getTick() >= lastTick) {
         displayPanel.setTick(firstTick);
@@ -103,12 +104,12 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     resetTickBounds();
     displayPanel = new AnimationPanel(model);
     displayPanel.setPreferredSize(new Dimension(500, 500));
-    displayScrollPane = new JScrollPane(displayPanel);
+    JScrollPane displayScrollPane = new JScrollPane(displayPanel);
 
     JPanel editorPanel = new JPanel(new GridLayout(2, 2, 15, 10));
     editorPanel.setPreferredSize(new Dimension(625, 600));
 
-    shapeDisplayPanel = new JPanel(new BorderLayout());
+    JPanel shapeDisplayPanel = new JPanel(new BorderLayout());
     shapeDisplayPanel.add(new JLabel("Shapes"), BorderLayout.PAGE_START);
     shapeList = new JList<>(this.getShapesInfoAsArray());
     shapeList.setLayoutOrientation(JList.VERTICAL);
@@ -133,7 +134,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     });
     shapeDisplayPanel.add(deleteShapeButton, BorderLayout.PAGE_END);
 
-    keyFrameDisplayPanel = new JPanel(new BorderLayout());
+    JPanel keyFrameDisplayPanel = new JPanel(new BorderLayout());
     keyFrameDisplayPanel.add(new JLabel("Key Frames"), BorderLayout.PAGE_START);
     keyFrameList = new JList<>(this.getKeyFrameInfoAsArray());
     keyFrameList.setLayoutOrientation(JList.VERTICAL);
@@ -154,7 +155,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     });
     keyFrameDisplayPanel.add(deleteKeyFrameButton, BorderLayout.PAGE_END);
 
-    addShapePanel = new JPanel();
+    JPanel addShapePanel = new JPanel();
     addShapePanel.setPreferredSize(new Dimension(150, 300));
     JLabel nameLabel = new JLabel("Name");
     addShapeNameBox = new JTextField(7);
@@ -162,7 +163,7 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     JLabel shapeLabel = new JLabel("Shape");
     addShapeTypeBox = new JComboBox<>(new String[]{"Rectangle", "Ellipse"});
 
-    addShapeButton = new JButton("Add Shape");
+    JButton addShapeButton = new JButton("Add Shape");
     addShapeButton.setPreferredSize(new Dimension(200, 30));
     addShapeButton.addActionListener((ActionEvent e) -> {
       addShape();
@@ -176,10 +177,10 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     addShapePanel.add(addShapeTypeBox);
     addShapePanel.add(addShapeButton);
 
-    keyFrameModifyPanel = new JPanel();
-    editKeyFramePanel = new JPanel();
+    JPanel keyFrameModifyPanel = new JPanel();
+    JPanel editKeyFramePanel = new JPanel();
     editKeyFramePanel.setPreferredSize(new Dimension(190, 100));
-    addKeyFramePanel = new JPanel();
+    JPanel addKeyFramePanel = new JPanel();
     addKeyFramePanel.setPreferredSize(new Dimension(240, 100));
     editKeyFramePanel.add(new JLabel("x "));
     editKeyFramePanel.add(editX);
@@ -242,26 +243,22 @@ public class EditableAnimationView extends JFrame implements AnimationView {
     editorPanel.add(addShapePanel);
     editorPanel.add(keyFrameModifyPanel);
 
-    viewerPanel = new JPanel(new BorderLayout());
+    JPanel viewerPanel = new JPanel(new BorderLayout());
     viewerPanel.setPreferredSize(new Dimension(500, 600));
 
-    playerPanel = new JPanel();
+    JPanel playerPanel = new JPanel();
     playerPanel.setPreferredSize(new Dimension(500, 100));
-    this.restartButton = new JButton("Restart");
+    JButton restartButton = new JButton("Restart");
     restartButton.addActionListener((ActionEvent e) -> {
       displayPanel.setTick(1);
       timer.restart();
     });
-    this.playButton = new JButton("Play");
-    playButton.addActionListener((ActionEvent e) -> {
-      timer.start();
-    });
-    this.pauseButton = new JButton("Pause");
-    pauseButton.addActionListener((ActionEvent e) -> {
-      timer.stop();
-    });
+    JButton playButton = new JButton("Play");
+    playButton.addActionListener((ActionEvent e) -> timer.start());
+    JButton pauseButton = new JButton("Pause");
+    pauseButton.addActionListener((ActionEvent e) -> timer.stop());
     this.speedTextField = new JTextField("" + this.speed, 2);
-    this.changeSpeedButton = new JButton("Change");
+    JButton changeSpeedButton = new JButton("Change");
     changeSpeedButton.addActionListener((ActionEvent e) -> {
       try {
         this.speed = Integer.parseInt(speedTextField.getText());
@@ -270,10 +267,8 @@ public class EditableAnimationView extends JFrame implements AnimationView {
         this.showError(error.getMessage());
       }
     });
-    this.isLoopingBox = new JCheckBox("Looping", false);
-    isLoopingBox.addActionListener((ActionEvent e) -> {
-      this.isLooping = !isLooping;
-    });
+    JCheckBox isLoopingBox = new JCheckBox("Looping", false);
+    isLoopingBox.addActionListener((ActionEvent e) -> this.isLooping = !isLooping);
 
     playerPanel.add(restartButton);
     playerPanel.add(playButton);

@@ -1,6 +1,7 @@
 package cs3500.animator.model;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.util.Map;
 
 /**

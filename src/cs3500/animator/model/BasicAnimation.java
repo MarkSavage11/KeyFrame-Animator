@@ -1,6 +1,8 @@
 package cs3500.animator.model;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
 
 /**
  * An animation that would be stored in a shape in an animation model. This type of animation holds

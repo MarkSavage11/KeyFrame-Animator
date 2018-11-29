@@ -1,13 +1,13 @@
 package cs3500.animator;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 
 import cs3500.animator.controller.AnimationControllerImpl;
 import cs3500.animator.controller.IAnimationController;
@@ -21,6 +21,12 @@ import cs3500.animator.view.TextAnimationView;
 import cs3500.animator.view.VisualAnimationView;
 
 public final class Excellence {
+  /**
+   * It's the main method. Uses the specification of command line argument syntax from the
+   * assignment.
+   *
+   * @param args the command line arguments
+   */
   public static void main(String[] args) {
     Map<String, String> flags = new HashMap<>();
 
@@ -36,7 +42,8 @@ public final class Excellence {
 
     if (flags.containsKey("-in")) {
       try {
-        model = AnimationReader.parseFile(new FileReader(flags.get("-in")), new AnimationModelImpl.Builder());
+        model = AnimationReader.parseFile(new FileReader(flags.get("-in")),
+                new AnimationModelImpl.Builder());
       } catch (IOException e) {
         showError("Unable to read from input file");
       }

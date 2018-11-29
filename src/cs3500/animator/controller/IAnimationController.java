@@ -1,6 +1,5 @@
 package cs3500.animator.controller;
 
-import cs3500.animator.model.AnimationModel;
 import cs3500.animator.model.ShapeType;
 import cs3500.animator.model.State;
 import cs3500.animator.view.AnimationView;
@@ -32,7 +31,7 @@ public interface IAnimationController {
   void addKeyframe(String shapeName, int tick, State state);
 
   /**
-   * Edits the keyframe of the given shape at the given tick to have the given state
+   * Edits the keyframe of the given shape at the given tick to have the given state.
    *
    * @param shapeName the name of the shape the keyframe belongs to
    * @param tick      the tick at which the keyframe occurs
@@ -41,7 +40,7 @@ public interface IAnimationController {
   void editKeyFrame(String shapeName, int tick, State state);
 
   /**
-   * Deletes the keyframe of the given shape at the given tick
+   * Deletes the keyframe of the given shape at the given tick.
    *
    * @param shapeName the name of the shape that the keyframe belongs to
    * @param tick      the tick the keyframe occurs

@@ -1,6 +1,8 @@
 package cs3500.animator.model;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
 
 /**
  * Implementation of the State interface. Its used by animations to present all of a shapes

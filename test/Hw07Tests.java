@@ -2,8 +2,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.util.Collections;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -150,6 +153,10 @@ public class Hw07Tests {
 
   @Test
   public void testDeleteNoAnimations() { //delete should not complain when there are no animations
-    model.deleteKeyframe("r2", 20);
+    try {
+      model.deleteKeyframe("r2", 20);
+    } catch (Exception e) {
+      fail();
+    }
   }
 }

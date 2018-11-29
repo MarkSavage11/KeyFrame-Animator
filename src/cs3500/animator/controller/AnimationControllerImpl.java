@@ -1,12 +1,12 @@
 package cs3500.animator.controller;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import cs3500.animator.model.AnimationModel;
 import cs3500.animator.model.ShapeType;
 import cs3500.animator.model.State;
 import cs3500.animator.view.AnimationView;
-import cs3500.animator.view.EditableAnimationView;
 
 public class AnimationControllerImpl implements IAnimationController {
   private AnimationModel model;

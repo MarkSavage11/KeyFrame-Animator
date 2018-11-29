@@ -1,6 +1,8 @@
 package cs3500.animator.model;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Point;
 
 /**
  * Represents the state of a shape, holding a position, size, and color.

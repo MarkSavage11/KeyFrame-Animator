@@ -1,9 +1,11 @@
 package cs3500.animator.view;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 import cs3500.animator.model.ReadOnlyAnimationModel;
 import cs3500.animator.model.ReadOnlyShape;

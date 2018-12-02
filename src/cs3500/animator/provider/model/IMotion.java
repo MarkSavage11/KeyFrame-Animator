@@ -30,21 +30,21 @@ public interface IMotion {
    *
    * @return the start state
    */
-  State getStartState();
+  IState getStartState();
 
   /**
    * Returns the end state of this motion to get pass the initial appearence of the shape.
    *
    * @return the end state
    */
-  State getEndState();
+  IState getEndState();
 
   /**
    * Gets the intermediate shapes to be drawn between a motion.
    *
    * @return ArrayList of states
    */
-  ArrayList<State> interpolateShapes();
+  ArrayList<IState> interpolateShapes();
 
   /**
    * Renders this motion as a string in SVG format. If this motion has no change across it, returns

@@ -3,7 +3,7 @@ package cs3500.animator.provider.view;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import cs3500.animator.model.IPicture;
+import cs3500.animator.provider.model.IPicture;
 import cs3500.animator.provider.model.ImmutableModel;
 
 

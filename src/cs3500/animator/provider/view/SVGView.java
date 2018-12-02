@@ -1,6 +1,6 @@
 package cs3500.animator.provider.view;
 
-import cs3500.animator.model.IPicture;
+import cs3500.animator.provider.model.IPicture;
 import cs3500.animator.provider.model.ImmutableModel;
 
 import java.io.IOException;

@@ -24,7 +24,7 @@ public interface ImmutableModel {
    * @param currentTime the current time to get states
    * @return an arraylist of states
    */
-  ArrayList<State> getStatesAtTime(int currentTime);
+  ArrayList<IState> getStatesAtTime(int currentTime);
 
   /**
    * Returns an arraylist with integers that represent the bounds of the canvas. The order of the

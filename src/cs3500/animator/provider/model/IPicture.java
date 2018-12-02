@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Interface that represents a Picture. A picture is a piece of an animation that has as list of
- * {@link Motion} motions. Each picture is associated with its list of motions that must be ordered
+ * {@link IMotion} motions. Each picture is associated with its list of motions that must be ordered
  * by time for future execution. A picture supports printing itself and adding motions, and getting
  * motions specified at a certain time.
  */
@@ -23,7 +23,7 @@ public interface IPicture {
    * @param m The motion to be added.
    * @throws IllegalArgumentException if the motion could not be added
    */
-  void addMotion(Motion m) throws IllegalArgumentException;
+  void addMotion(IMotion m) throws IllegalArgumentException;
 
   /**
    * Retreives a list of motions at time t from a picture. Also initializes the pictures features if
@@ -32,7 +32,7 @@ public interface IPicture {
    * @param time specified time
    * @return a list of motions from a picture at the specified time
    */
-  ArrayList<Motion> getMotionsAtTime(int time);
+  ArrayList<IMotion> getMotionsAtTime(int time);
 
   /**
    * Determines if this is, in fact the picture we are looking for.
@@ -113,7 +113,7 @@ public interface IPicture {
    *
    * @return an array list of states
    */
-  ArrayList<State> getStates();
+  ArrayList<IState> getStates();
 
   /**
    * Renders this picture as its SVG format. Will add initial state variables and animate tags as
@@ -132,14 +132,14 @@ public interface IPicture {
    * @param time time at which the motion is requested.
    * @return the motion at the time requested
    */
-  Motion motionAtTime(int time);
+  IMotion motionAtTime(int time);
 
   /**
    * Returns the last motion of this pictures animation.
    *
    * @return the motion with the greatest start time
    */
-  Motion getLastMotion();
+  IMotion getLastMotion();
 
   /**
    * Replaces some motions with the motions in the given list. The original list overall start/end
@@ -149,7 +149,7 @@ public interface IPicture {
    * @param toRemove motion(s) to be removed from animation.
    * @param toAdd    motion(s) to be added in in toRemove's place.
    */
-  void replaceMotion(ArrayList<Motion> toRemove, ArrayList<Motion> toAdd);
+  void replaceMotion(ArrayList<IMotion> toRemove, ArrayList<IMotion> toAdd);
 
   /**
    * Gets the alias of this picture so the user can reference it.
@@ -167,12 +167,12 @@ public interface IPicture {
    * @param time time of the key frame.
    * @return the two motions surrounding the key frame.
    */
-  ArrayList<Motion> motionsOfKeyFrame(int time);
+  ArrayList<IMotion> motionsOfKeyFrame(int time);
 
   /**
    * Returns a copy of all the motions in this picture.
    *
    * @return copy of all motions in this picture.
    */
-  ArrayList<Motion> copyMotions();
+  ArrayList<IMotion> copyMotions();
 }

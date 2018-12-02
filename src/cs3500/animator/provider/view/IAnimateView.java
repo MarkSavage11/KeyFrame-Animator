@@ -1,6 +1,8 @@
 package cs3500.animator.provider.view;
 
 import cs3500.animator.model.State;
+import cs3500.animator.provider.model.IState;
+
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javax.swing.JPanel;
@@ -26,7 +28,7 @@ public interface IAnimateView {
    *
    * @param statesupdate the list of updated pictures
    */
-  void update(ArrayList<State> statesupdate);
+  void update(ArrayList<IState> statesupdate);
 
   /**
    * Diplays a View for an animated version. There is no need for a string input or appendable.

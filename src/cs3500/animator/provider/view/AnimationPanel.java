@@ -1,6 +1,7 @@
 package cs3500.animator.provider.view;
 
-import cs3500.animator.provider.model.State;
+import cs3500.animator.provider.model.IState;
+import cs3500.animator.provider.model.IState;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -14,7 +15,7 @@ import javax.swing.JPanel;
  */
 public class AnimationPanel extends JPanel {
 
-  private ArrayList<State> states;
+  private ArrayList<IState> states;
 
 
   /**
@@ -23,7 +24,7 @@ public class AnimationPanel extends JPanel {
    *
    * @param states THe list of pictures that need to be drawn in this animation
    */
-  public AnimationPanel(ArrayList<State> states) {
+  public AnimationPanel(ArrayList<IState> states) {
     super();
     this.states = states;
     this.setBackground(Color.WHITE);
@@ -41,7 +42,7 @@ public class AnimationPanel extends JPanel {
     Graphics2D g2d = (Graphics2D) g;
 
     //paint shapes with background color showing as well
-    for (State state : states) {
+    for (IState state : states) {
       //set the color for all of them
 
       g2d.setColor(new Color(state.getR(), state.getG(), state.getB()));
@@ -75,7 +76,7 @@ public class AnimationPanel extends JPanel {
    *
    * @param updated List of updated pictures to be drawn
    */
-  public void updateStates(ArrayList<State> updated) {
+  public void updateStates(ArrayList<IState> updated) {
     this.states = updated;
 
   }

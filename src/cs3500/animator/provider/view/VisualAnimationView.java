@@ -1,8 +1,8 @@
 package cs3500.animator.provider.view;
 
-import cs3500.animator.model.IPicture;
+import cs3500.animator.provider.model.IPicture;
+import cs3500.animator.provider.model.IState;
 import cs3500.animator.provider.model.ImmutableModel;
-import cs3500.animator.model.State;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -56,7 +56,7 @@ public class VisualAnimationView extends JFrame implements IAnimateView, ActionL
 
     //border layout with a panel
     this.setLayout(new BorderLayout());
-    this.panel = new AnimationPanel(new ArrayList<State>());
+    this.panel = new AnimationPanel(new ArrayList<IState>());
     this.panel.setPreferredSize(new Dimension(750, 750));
     this.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
     this.add(panel);
@@ -117,7 +117,7 @@ public class VisualAnimationView extends JFrame implements IAnimateView, ActionL
   }
 
   @Override
-  public void update(ArrayList<State> statesupdate) {
+  public void update(ArrayList<IState> statesupdate) {
 
     this.panel.updateStates(statesupdate);
   }

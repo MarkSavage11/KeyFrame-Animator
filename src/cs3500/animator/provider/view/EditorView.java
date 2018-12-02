@@ -1,6 +1,7 @@
 package cs3500.animator.provider.view;
 
 import cs3500.animator.model.State;
+import cs3500.animator.provider.model.IState;
 
 import java.awt.TextField;
 import java.awt.event.ActionListener;
@@ -197,7 +198,7 @@ public class EditorView extends JFrame implements IAnimateView {
   }
 
   @Override
-  public void update(ArrayList<State> statesupdate) {
+  public void update(ArrayList<IState> statesupdate) {
     animateView.update(statesupdate);
   }
 

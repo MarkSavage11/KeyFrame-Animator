@@ -29,7 +29,7 @@ public interface IAnimation {
    * @param time specified time.
    * @return Array list of Motions
    */
-  ArrayList<Motion> getMotionsAtTime(int time);
+  ArrayList<IMotion> getMotionsAtTime(int time);
 
   /**
    * Returns a list of allthe pictures in the animation.

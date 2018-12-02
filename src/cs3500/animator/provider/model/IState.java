@@ -1,6 +1,6 @@
 package cs3500.animator.provider.model;
 
-import cs3500.animator.model.Shapes;
+import cs3500.animator.provider.model.Shapes;
 
 /**
  * Interface that represents a State. A State knows its time, dimensions, location, and shape type,

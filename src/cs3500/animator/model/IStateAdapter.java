@@ -4,11 +4,13 @@ import cs3500.animator.provider.model.IState;
 
 public class IStateAdapter implements IState {
 
+  ShapeType type;
   State adaptee;
   //String shapeType;
 
-  public IStateAdapter(State adaptee){
+  public IStateAdapter(ShapeType type, State adaptee){
     this.adaptee = adaptee;
+    this.type = type;
   }
 
 
@@ -49,11 +51,9 @@ public class IStateAdapter implements IState {
 
   @Override
   public String getShapeType() {
-    return null;
+    return type.toString();
   }
 
   @Override
-  public void setShapeType(Shapes s) {
-    
-  }
+  public void setShapeType(Shapes s) {}
 }

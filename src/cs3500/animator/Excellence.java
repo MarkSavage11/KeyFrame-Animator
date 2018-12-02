@@ -16,6 +16,7 @@ import cs3500.animator.model.AnimationModelImpl;
 import cs3500.animator.util.AnimationReader;
 import cs3500.animator.view.AnimationView;
 import cs3500.animator.view.EditableAnimationView;
+import cs3500.animator.view.ProviderAdapterView;
 import cs3500.animator.view.SVGAnimationView;
 import cs3500.animator.view.TextAnimationView;
 import cs3500.animator.view.VisualAnimationView;
@@ -85,6 +86,9 @@ public final class Excellence {
           break;
         case "edit":
           view = new EditableAnimationView(controller, speed);
+          break;
+        case "provider":
+          view = new ProviderAdapterView(controller, speed);
           break;
         default:
           showError("Unknown view type");

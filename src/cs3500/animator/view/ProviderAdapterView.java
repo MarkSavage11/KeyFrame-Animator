@@ -13,7 +13,7 @@ public class ProviderAdapterView implements AnimationView {
   private int speed;
   private IAnimationController controller;
 
-  ProviderAdapterView (IAnimationController controller, int speed) {
+  public ProviderAdapterView (IAnimationController controller, int speed) {
     this.speed = speed;
     this.controller = controller;
   }

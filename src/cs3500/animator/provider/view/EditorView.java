@@ -193,7 +193,6 @@ public class EditorView extends JFrame implements IAnimateView {
 
   @Override
   public void refresh() {
-
     animateView.refresh();
   }
 
@@ -248,9 +247,7 @@ public class EditorView extends JFrame implements IAnimateView {
 
   @Override
   public void pause() {
-
     this.animateView.pause();
-
   }
 
   @Override

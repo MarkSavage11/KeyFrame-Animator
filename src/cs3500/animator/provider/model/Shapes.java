@@ -1,4 +1,4 @@
-package cs3500.animator.model;
+package cs3500.animator.provider.model;
 
 /**
  * Represents all the possible shapes of an animation. Can add new shapes, or other objects of

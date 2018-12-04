@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import cs3500.animator.controller.IAnimationController;
 import cs3500.animator.model.AnimationModel;
+import cs3500.animator.model.ReadOnlyAnimationModel;
 import cs3500.animator.model.State;
 import cs3500.animator.model.StateImpl;
 import cs3500.animator.provider.view.IActionListener;
@@ -18,11 +19,11 @@ import cs3500.animator.provider.view.IAnimateView;
 public class AdaptedAnimationListener implements IActionListener {
   private IAnimationController controller;
   private IAnimateView editor;
-  private AnimationModel model;
+  private ReadOnlyAnimationModel model;
 
 
   public AdaptedAnimationListener(IAnimationController controller,
-                                  IAnimateView editor, AnimationModel model){
+                                  IAnimateView editor, ReadOnlyAnimationModel model){
     this.controller = controller;
     this.editor = editor;
     this.model = model;

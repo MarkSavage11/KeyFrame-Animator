@@ -1,4 +1,6 @@
-package cs3500.animator.model;
+package cs3500.animator.provider.model;
+
+import cs3500.animator.provider.model.Shapes;
 
 /**
  * Class for determining what kind of shape to construct a picture with. This is a workaround asking

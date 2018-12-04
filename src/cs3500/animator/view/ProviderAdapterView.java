@@ -24,7 +24,7 @@ public class ProviderAdapterView implements AnimationView {
 
     ImmutableModel adaptedModel = new ModelAdapter(model);
     IAnimateView providerView = new EditorView(new VisualAnimationView(adaptedModel, speed));
-    IActionListener listener = new AdaptedAnimationListener(controller, providerView, model);
+    IActionListener listener = new AdaptedAnimationListener(controller, providerView, adaptedModel);
 
     providerView.setListener(listener, new KeyListenerAdapter(listener));
 

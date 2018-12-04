@@ -59,7 +59,7 @@ public class BasicAnimation implements Animation {
 
   @Override
   public State getStateAt(int tick) throws IllegalArgumentException {
-    if (tick > startTick && tick < endTick) {
+    if (tick >= startTick && tick <= endTick) {
       return new StateImpl(
               new Point(
                       interpolate(startState.getPosition().x, endState.getPosition().x, tick),

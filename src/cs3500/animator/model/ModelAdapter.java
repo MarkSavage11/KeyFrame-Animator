@@ -28,7 +28,9 @@ public class ModelAdapter implements ImmutableModel {
   public ArrayList<IState> getStatesAtTime(int currentTime) {
     ArrayList<IState> states = new ArrayList<>();
     for (ReadOnlyShape s : model.getShapes().values()) {
-      states.add(new IStateAdapter(s.getType(), s.getStateAt(currentTime)));
+      try {
+        states.add(new IStateAdapter(s.getType(), s.getStateAt(currentTime)));
+      } catch (IllegalArgumentException e) {}
     }
     return states;
   }

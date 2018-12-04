@@ -2,6 +2,7 @@ package cs3500.animator.view;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
 import java.util.Map;
 
 import cs3500.animator.provider.view.IActionListener;
@@ -15,6 +16,7 @@ public class KeyListenerAdapter implements KeyListener {
   public KeyListenerAdapter(IActionListener listener) {
     this.listener = listener;
 
+    keyToName = new HashMap<>();
     keyToName.put('p', "Play");
     keyToName.put('u', "Pause");
     keyToName.put('r', "Restart");

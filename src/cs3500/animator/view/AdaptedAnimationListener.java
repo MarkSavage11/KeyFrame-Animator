@@ -50,6 +50,7 @@ public class AdaptedAnimationListener implements IActionListener {
         break;
       case "Looping Toggle":
         this.editor.toggleLooping();
+        break;
       case "Add":
         fields = editor.getAddFields("Add");
         String name = fields.get(8);

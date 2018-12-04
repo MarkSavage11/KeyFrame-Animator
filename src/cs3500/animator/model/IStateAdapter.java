@@ -1,6 +1,7 @@
 package cs3500.animator.model;
 
 import cs3500.animator.provider.model.IState;
+import cs3500.animator.provider.model.Shapes;
 
 public class IStateAdapter implements IState {
 

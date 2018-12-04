@@ -5,6 +5,7 @@ import cs3500.animator.model.ModelAdapter;
 import cs3500.animator.model.ReadOnlyAnimationModel;
 import cs3500.animator.provider.model.ImmutableModel;
 import cs3500.animator.provider.view.EditorView;
+import cs3500.animator.provider.view.IActionListener;
 import cs3500.animator.provider.view.IAnimateView;
 import cs3500.animator.provider.view.VisualAnimationView;
 
@@ -22,10 +23,11 @@ public class ProviderAdapterView implements AnimationView {
   public void display(ReadOnlyAnimationModel model) throws IllegalStateException {
 
     ImmutableModel adaptedModel = new ModelAdapter(model);
-
     IAnimateView providerView = new EditorView(new VisualAnimationView(adaptedModel, speed));
-    providerView.setListener();
-    //TODO Write an AnimationListener to go in these parens
+    IActionListener listener = new AdaptedAnimationListener(controller, providerView, model);
+
+    providerView.setListener(listener, new KeyListenerAdapter(listener));
+
     providerView.displayAnimationVisual();
   }
 

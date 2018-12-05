@@ -87,6 +87,10 @@ public class AdaptedAnimationListener implements IActionListener {
         break;
       case "Save":
         fields = editor.getAddFields("Save");
+        if (fields.get(0).equals("")){
+          this.editor.showErrorMessage("Cannot save to a file with no name");
+          break;
+        }
         if (fields.get(0).equals("Text") || fields.get(0).equals("text")) {
           try {
             BufferedWriter file = new BufferedWriter(new FileWriter(fields.get(1)));
@@ -98,7 +102,9 @@ public class AdaptedAnimationListener implements IActionListener {
           }
         } else if (fields.get(0).equals("SVG") || fields.get(0).equals("svg")) {
           try {
-            new TextAnimationView(new BufferedWriter(new FileWriter(fields.get(1))));
+            BufferedWriter file = new BufferedWriter(new FileWriter(fields.get(1)));
+            new TextAnimationView(file);
+            file.close();
           }catch(IOException e){
             editor.showErrorMessage(e.getMessage());
           }

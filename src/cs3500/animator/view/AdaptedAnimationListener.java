@@ -69,7 +69,7 @@ public class AdaptedAnimationListener implements IActionListener {
                   new Color(Integer.parseInt(fields.get(5)), Integer.parseInt(fields.get(6)),
                           Integer.parseInt(fields.get(7))));
         }catch(IllegalArgumentException e){
-          editor.showErrorMessage(e.getMessage());
+          editor.showErrorMessage("Invalid argument(s)");
           break;
         }
         this.controller.addKeyframe(name, addTick, state);
@@ -79,7 +79,7 @@ public class AdaptedAnimationListener implements IActionListener {
         int removeTick;
         try{
           removeTick = Integer.parseInt(fields.get(1));
-        }catch(NumberFormatException e){
+        }catch(IllegalArgumentException e){
           editor.showErrorMessage("Please enter a number for Tick");
           break;
         }
@@ -89,7 +89,10 @@ public class AdaptedAnimationListener implements IActionListener {
         fields = editor.getAddFields("Save");
         if (fields.get(0).equals("Text") || fields.get(0).equals("text")) {
           try {
-            new SVGAnimationView(new BufferedWriter(new FileWriter(fields.get(1))), 30);
+            BufferedWriter file = new BufferedWriter(new FileWriter(fields.get(1)));
+            new SVGAnimationView(file, 30);
+            file.close();
+
           }catch(IOException e){
             editor.showErrorMessage(e.getMessage());
           }

@@ -76,6 +76,10 @@ public class AdaptedAnimationListener implements IActionListener {
         break;
       case "Remove":
         fields = editor.getAddFields("Remove");
+        if(fields.get(0).equals("")){
+          editor.showErrorMessage("Select a shape to remove from");
+          break;
+        }
         int removeTick;
         try{
           removeTick = Integer.parseInt(fields.get(1));

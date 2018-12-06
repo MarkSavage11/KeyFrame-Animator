@@ -1,6 +1,7 @@
 package cs3500.animator.provider.view;
 
 import cs3500.animator.provider.model.IState;
+import cs3500.animator.view.IActionListener;
 
 import java.awt.event.KeyListener;
 import java.util.ArrayList;

@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import cs3500.animator.provider.view.IActionListener;
+import cs3500.animator.view.IActionListener;
 
 public class KeyListenerAdapter implements KeyListener {
 

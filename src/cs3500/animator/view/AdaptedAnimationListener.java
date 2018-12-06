@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import cs3500.animator.controller.IAnimationController;
+import cs3500.animator.model.ShapeType;
 import cs3500.animator.model.State;
 import cs3500.animator.model.StateImpl;
 import cs3500.animator.provider.model.ImmutableModel;
@@ -114,6 +115,19 @@ public class AdaptedAnimationListener implements IActionListener {
           }
         } else {
           editor.showErrorMessage("Improper Save type");
+        }
+        break;
+      case "Load":
+        //TODO Load Functionality
+        break;
+      case "Add Picture":
+        fields = editor.getAddFields("Add Picture");
+        if(fields.get(0).equals("rectangle")){
+          this.controller.addShape(fields.get(1), ShapeType.RECTANGLE);
+        } else if (fields.get(0).equals("ellipse")){
+          this.controller.addShape(fields.get(1), ShapeType.ELLIPSE);
+        } else {
+          editor.showErrorMessage("Select a shape type");
         }
         break;
       default:

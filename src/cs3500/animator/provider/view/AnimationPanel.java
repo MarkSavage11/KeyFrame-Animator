@@ -1,7 +1,6 @@
 package cs3500.animator.provider.view;
 
 import cs3500.animator.provider.model.IState;
-import cs3500.animator.provider.model.IState;
 
 import java.awt.Color;
 import java.awt.Graphics;

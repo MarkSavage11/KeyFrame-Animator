@@ -4,14 +4,22 @@ import java.awt.Point;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 import cs3500.animator.controller.IAnimationController;
+import cs3500.animator.model.Animation;
+import cs3500.animator.model.AnimationModel;
+import cs3500.animator.model.AnimationModelImpl;
+import cs3500.animator.model.ReadOnlyShape;
 import cs3500.animator.model.State;
 import cs3500.animator.model.StateImpl;
+import cs3500.animator.provider.model.IPicture;
 import cs3500.animator.provider.model.ImmutableModel;
+import cs3500.animator.util.AnimationReader;
 import cs3500.animator.view.IActionListener;
 import cs3500.animator.provider.view.IAnimateView;
 
@@ -114,6 +122,27 @@ public class AdaptedAnimationListener implements cs3500.animator.view.IActionLis
           }
         } else {
           editor.showErrorMessage("Improper Save type");
+        }
+        break;
+      case "Load":
+        AnimationModel tempModel;
+        try {
+          tempModel = AnimationReader.parseFile(new FileReader(inputFile), //TODO: replace with the value from the load text box
+                  new AnimationModelImpl.Builder());
+        } catch (IOException e) {
+          editor.showErrorMessage("Unable to read from input file");
+          break;
+        }
+
+        for (IPicture p: model.getPictures()) {
+          controller.deleteShape(p.getAlias());
+        }
+
+        for (Map.Entry<String, ReadOnlyShape> shape: tempModel.getShapes().entrySet()) {
+          controller.addShape(shape.getKey(), shape.getValue().getType());
+          for (Map.Entry<Integer,State> keyframe: shape.getValue().getKeyframes().entrySet()) {
+            controller.addKeyframe(shape.getKey(), keyframe.getKey(), keyframe.getValue());
+          }
         }
         break;
       default:

@@ -12,10 +12,10 @@ import cs3500.animator.controller.IAnimationController;
 import cs3500.animator.model.State;
 import cs3500.animator.model.StateImpl;
 import cs3500.animator.provider.model.ImmutableModel;
-import cs3500.animator.provider.view.IActionListener;
+import cs3500.animator.view.IActionListener;
 import cs3500.animator.provider.view.IAnimateView;
 
-public class AdaptedAnimationListener implements IActionListener {
+public class AdaptedAnimationListener implements cs3500.animator.view.IActionListener {
   private IAnimationController controller;
   private IAnimateView editor;
   private ImmutableModel model;

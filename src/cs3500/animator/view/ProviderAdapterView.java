@@ -5,7 +5,7 @@ import cs3500.animator.model.ModelAdapter;
 import cs3500.animator.model.ReadOnlyAnimationModel;
 import cs3500.animator.provider.model.ImmutableModel;
 import cs3500.animator.provider.view.EditorView;
-import cs3500.animator.provider.view.IActionListener;
+import cs3500.animator.view.IActionListener;
 import cs3500.animator.provider.view.IAnimateView;
 import cs3500.animator.provider.view.VisualAnimationView;
 

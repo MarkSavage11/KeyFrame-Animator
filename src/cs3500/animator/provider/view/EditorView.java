@@ -1,6 +1,9 @@
 package cs3500.animator.provider.view;
 
+
+import cs3500.animator.model.State;
 import cs3500.animator.provider.model.IState;
+import cs3500.animator.view.IActionListener;
 
 import java.awt.TextField;
 import java.awt.event.ActionListener;
@@ -15,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 
 
@@ -40,6 +44,11 @@ public class EditorView extends JFrame implements IAnimateView {
   private JButton removeKeyFrameButton;
   private JButton saveAnimationButton;
   private JButton loadAnimationButton;
+  private JButton addPicture;
+
+  private JRadioButton rectangle;
+  private JRadioButton ellipse;
+
   //Textfields
   private TextField addTtext;
   private TextField addxtext;
@@ -50,6 +59,7 @@ public class EditorView extends JFrame implements IAnimateView {
   private TextField addgtext;
   private TextField addbtext;
   private TextField aliastext;
+
   //Panels - one wrapper panel, one animation panel, one menu panel, add keyframe panel,
   //delete key frame panel, and alias list panel
   private JPanel mainPanel;
@@ -57,6 +67,7 @@ public class EditorView extends JFrame implements IAnimateView {
   private JPanel addKeyFramePanel;
   private JPanel removeKeyFramePanel;
   private JPanel savePanel;
+  private JPanel addPicturePanel;
   //Labels
   private JLabel addT;
   private JLabel addx;
@@ -72,12 +83,16 @@ public class EditorView extends JFrame implements IAnimateView {
   private JLabel textOrSVG;
   private JLabel fileName;
   private JLabel loadAnimation;
+  private JLabel addPictureLabel;
   //TextFields
   private TextField removeText;
   private TextField aliasRemoveText;
   private TextField textOrSVGtext;
   private TextField fileNametext;
   private TextField loanAnimationtext;
+  private TextField newPicName;
+
+
 
   //layouts
   private GridLayout addKeyFrameLayout;
@@ -101,6 +116,7 @@ public class EditorView extends JFrame implements IAnimateView {
     animateView.addDrawingComp(addKeyFramePanel);
     animateView.addDrawingComp(removeKeyFramePanel);
     animateView.addDrawingComp(savePanel);
+    animateView.addDrawingComp(addPicturePanel);
 
     this.pack();
 
@@ -131,6 +147,19 @@ public class EditorView extends JFrame implements IAnimateView {
 
         break;
 
+      case "Add Picture"  :
+        if (rectangle.isSelected()){
+          fields.add("rectangle");
+          fields.add(newPicName.getText());
+        }
+
+        else if (ellipse.isSelected()){
+          fields.add("ellipse");
+          fields.add(newPicName.getText());
+        }
+
+        break;
+
       case "Save":
         fields.add(textOrSVGtext.getText());
         fields.add(fileNametext.getText());
@@ -138,6 +167,7 @@ public class EditorView extends JFrame implements IAnimateView {
       case "Load":
         fields.add(loanAnimationtext.getText());
         break;
+
       default:
         return fields;
     }
@@ -165,6 +195,7 @@ public class EditorView extends JFrame implements IAnimateView {
     removeKeyFrameButton.addActionListener(listen);
     saveAnimationButton.addActionListener(listen);
     loadAnimationButton.addActionListener(listen);
+    addPicture.addActionListener(listen);
     addKeyListener(keys);
 
 
@@ -192,6 +223,7 @@ public class EditorView extends JFrame implements IAnimateView {
 
   @Override
   public void refresh() {
+
     animateView.refresh();
   }
 
@@ -246,7 +278,9 @@ public class EditorView extends JFrame implements IAnimateView {
 
   @Override
   public void pause() {
+
     this.animateView.pause();
+
   }
 
   @Override
@@ -294,7 +328,15 @@ public class EditorView extends JFrame implements IAnimateView {
     saveAnimationButton.setActionCommand("Save");
 
     loadAnimationButton = new JButton("Load");
-    loadAnimationButton = new JButton("Load");
+    loadAnimationButton.setActionCommand("Load");
+
+    rectangle = new JRadioButton("Rectangle");
+    ellipse = new JRadioButton("Ellipse");
+
+    addPicture = new JButton("Add Picture");
+    addPicture.setActionCommand("Add Picture");
+
+
 
   }
 
@@ -309,6 +351,7 @@ public class EditorView extends JFrame implements IAnimateView {
     addKeyFramePanel = new JPanel();
     removeKeyFramePanel = new JPanel();
     savePanel = new JPanel();
+    addPicturePanel = new JPanel();
 
     //1 row two columns
     addKeyFrameLayout = new GridLayout(1, 2);
@@ -329,6 +372,7 @@ public class EditorView extends JFrame implements IAnimateView {
     addgtext = new TextField();
     addbtext = new TextField();
     aliastext = new TextField();
+    newPicName = new TextField();
 
     //extra cred
     textOrSVGtext = new TextField();
@@ -359,6 +403,10 @@ public class EditorView extends JFrame implements IAnimateView {
     aliasToRemove = new JLabel("Alias");
     aliasRemoveText = new TextField();
     aliasRemoveText.setPreferredSize(new Dimension(50, 20));
+
+    addPictureLabel = new JLabel("Picture Name");
+    newPicName.setPreferredSize(new Dimension(50, 20));
+
 
   }
 
@@ -406,6 +454,13 @@ public class EditorView extends JFrame implements IAnimateView {
     removeKeyFramePanel.add(aliasToRemove);
     removeKeyFramePanel.add(aliasRemoveText);
     removeKeyFramePanel.add(removeKeyFrameButton);
+
+    //add Picture Button
+    addPicturePanel.add(rectangle);
+    addPicturePanel.add(ellipse);
+    addPicturePanel.add(newPicName);
+    addPicturePanel.add(addPictureLabel);
+    addPicturePanel.add(addPicture);
 
     //save panel
     savePanel.add(textOrSVG);

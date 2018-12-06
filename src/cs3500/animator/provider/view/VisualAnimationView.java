@@ -1,8 +1,10 @@
 package cs3500.animator.provider.view;
 
+import cs3500.animator.model.State;
 import cs3500.animator.provider.model.IPicture;
 import cs3500.animator.provider.model.IState;
 import cs3500.animator.provider.model.ImmutableModel;
+import cs3500.animator.view.IActionListener;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -37,6 +39,7 @@ public class VisualAnimationView extends JFrame implements IAnimateView, ActionL
   private int speed;
   private boolean looping;
   private int lastTime;
+  private JTextArea aliases;
 
 
   /**
@@ -63,7 +66,7 @@ public class VisualAnimationView extends JFrame implements IAnimateView, ActionL
 
     //alias list
 
-    JPanel aliaslist = new JPanel();
+     JPanel aliaslist = new JPanel();
     aliaslist.setLayout(new OverlayLayout(aliaslist));
     aliaslist.setLocation(0, 500);
     aliaslist.setPreferredSize(new Dimension(25, 75));
@@ -95,12 +98,19 @@ public class VisualAnimationView extends JFrame implements IAnimateView, ActionL
    */
   private String listOfAlias() {
 
+    
+
     String s = "Available Pictures: \n";
 
     for (IPicture p : model.getPictures()) {
+
+
       s = s + p.getAlias() + "\n";
     }
 
+
+
+    System.out.println(s);
     return s;
 
   }
@@ -120,6 +130,7 @@ public class VisualAnimationView extends JFrame implements IAnimateView, ActionL
   public void update(ArrayList<IState> statesupdate) {
 
     this.panel.updateStates(statesupdate);
+
   }
 
   @Override
@@ -150,6 +161,8 @@ public class VisualAnimationView extends JFrame implements IAnimateView, ActionL
     }
 
     this.update(model.getStatesAtTime(currentTime)); // we only want the ones at the specific time
+    aliases = new JTextArea( this.listOfAlias());
+
 
     currentTime++;
 
@@ -192,8 +205,11 @@ public class VisualAnimationView extends JFrame implements IAnimateView, ActionL
 
   @Override
   public void decreaseSpeed() {
-    this.speed -= 5;
-    this.timer.setDelay(1000 / this.speed);
+
+    if (speed > 5) {
+      this.speed -= 5;
+      this.timer.setDelay(1000 / this.speed);
+    }
   }
 
   @Override

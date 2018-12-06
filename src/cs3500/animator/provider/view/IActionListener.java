@@ -1,4 +1,4 @@
-package cs3500.animator.provider.view;
+package cs3500.animator.view;
 
 /**
  * Interface for action listener. This interface is implemented by the cs3500.animator.controller,

@@ -1,7 +1,5 @@
 package cs3500.animator.provider.view;
 
-import cs3500.animator.provider.model.IState;
-import cs3500.animator.provider.model.IState;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,6 +7,8 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+
+import cs3500.animator.provider.model.IState;
 
 /**
  * Class for an Animated panel. This will be the space that the animation shapes are drawn.

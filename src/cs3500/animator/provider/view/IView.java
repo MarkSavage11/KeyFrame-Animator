@@ -1,5 +1,6 @@
 package cs3500.animator.provider.view;
 
+
 import cs3500.animator.provider.model.ImmutableModel;
 
 /**

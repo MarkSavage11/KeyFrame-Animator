@@ -125,9 +125,10 @@ public class AdaptedAnimationListener implements cs3500.animator.view.IActionLis
         }
         break;
       case "Load":
+        fields = this.editor.getAddFields("Load");
         AnimationModel tempModel;
         try {
-          tempModel = AnimationReader.parseFile(new FileReader(inputFile), //TODO: replace with the value from the load text box
+          tempModel = AnimationReader.parseFile(new FileReader(fields.get(0)),
                   new AnimationModelImpl.Builder());
         } catch (IOException e) {
           editor.showErrorMessage("Unable to read from input file");

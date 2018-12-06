@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import cs3500.animator.controller.IAnimationController;
-import cs3500.animator.model.Animation;
 import cs3500.animator.model.AnimationModel;
 import cs3500.animator.model.AnimationModelImpl;
 import cs3500.animator.model.ReadOnlyShape;
+import cs3500.animator.model.ShapeType;
 import cs3500.animator.model.State;
 import cs3500.animator.model.StateImpl;
 import cs3500.animator.provider.model.IPicture;
@@ -143,6 +143,16 @@ public class AdaptedAnimationListener implements cs3500.animator.view.IActionLis
           for (Map.Entry<Integer,State> keyframe: shape.getValue().getKeyframes().entrySet()) {
             controller.addKeyframe(shape.getKey(), keyframe.getKey(), keyframe.getValue());
           }
+        }
+        break;
+      case "Add Picture":
+        fields = editor.getAddFields("Add Picture");
+        if(fields.get(0).equals("rectangle")){
+          this.controller.addShape(fields.get(1), ShapeType.RECTANGLE);
+        } else if (fields.get(0).equals("ellipse")){
+          this.controller.addShape(fields.get(1), ShapeType.ELLIPSE);
+        } else {
+          editor.showErrorMessage("Select a shape type");
         }
         break;
       default:

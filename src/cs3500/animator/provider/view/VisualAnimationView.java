@@ -1,10 +1,9 @@
 package cs3500.animator.provider.view;
 
-import cs3500.animator.model.State;
 import cs3500.animator.provider.model.IPicture;
 import cs3500.animator.provider.model.IState;
 import cs3500.animator.provider.model.ImmutableModel;
-import cs3500.animator.view.IActionListener;
+import cs3500.animator.model.State;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

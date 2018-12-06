@@ -145,6 +145,8 @@ public class AdaptedAnimationListener implements cs3500.animator.view.IActionLis
             controller.addKeyframe(shape.getKey(), keyframe.getKey(), keyframe.getValue());
           }
         }
+
+        editor.refresh();
         break;
       case "Add Picture":
         fields = editor.getAddFields("Add Picture");
